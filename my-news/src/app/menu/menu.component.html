@@ -1,0 +1,31 @@
+<nav>
+  <ul class="flex p-0">
+    <li class="flex flex-1">
+      <a
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex-1 text-center bg-gray-200 p-5 hover:bg-orange-200 focus:bg-orange-500"
+        routerLink="/"
+        routerLinkActive="active"
+        >Home</a
+      >
+    </li>
+    <li class="flex flex-1">
+      <a
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex-1 text-center bg-gray-200 p-5 hover:bg-orange-200 focus:bg-orange-500"
+        routerLink="/article"
+        routerLinkActive="active"
+        >Article</a
+      >
+    </li>
+    <li class="flex flex-1">
+      <a
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex-1 text-center bg-gray-200 p-5 hover:bg-orange-200 focus:bg-orange-500"
+        routerLink="/contact"
+        routerLinkActive="active"
+        >Contact</a
+      >
+    </li>
+  </ul>
+</nav>
