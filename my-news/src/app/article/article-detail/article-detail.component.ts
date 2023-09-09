@@ -18,6 +18,8 @@ export class ArticleDetailComponent implements OnInit {
     content: '',
     author: '',
     publishDate: '',
+    categoryId: 0,
+    statusId: 0,
   };
 
   constructor(
@@ -30,7 +32,9 @@ export class ArticleDetailComponent implements OnInit {
     if (articleId != null) {
       let articleTemp = this.articleService.getArticleById(+articleId) ?? null;
       if (articleTemp != null) {
-        this.article = articleTemp;
+        this.articleService
+          .getArticleById(+articleId)
+          .subscribe((result) => (this.article = result));
       }
     }
   }

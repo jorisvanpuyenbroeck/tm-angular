@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Article } from '../article';
-import { ArticleService } from '../article.service';
+import { Article } from '../article/article';
+import { ArticleService } from '../article/article.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,11 @@ import { ArticleService } from '../article.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  articles: Article[] = [];
+  articles$: Observable<Article[]> = new Observable<Article[]>();
 
   constructor(private articleService: ArticleService) {}
 
   ngOnInit(): void {
-    this.articles = this.articleService.getNewestArticle();
+    this.articles$ = this.articleService.getArticles();
   }
 }

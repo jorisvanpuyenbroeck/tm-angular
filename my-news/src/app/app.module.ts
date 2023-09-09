@@ -3,28 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ArticleComponent } from './article/article.component';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
-import { ContactComponent } from './contact/contact.component';
-import { ArticleDetailComponent } from './article-detail/article-detail.component';
-import { ShortenContentPipe } from './shorten-content.pipe';
+import { SharedModule } from './shared/shared.module';
+import { ArticleModule } from './article/article.module';
+import { AdminModule } from './admin/admin.module';
+import { SecurityModule } from './security/security.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ArticleComponent,
-    HomeComponent,
-    MenuComponent,
-    ContactComponent,
-    ArticleDetailComponent,
-    ShortenContentPipe
-  ],
+  declarations: [AppComponent, HomeComponent, MenuComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule,
+    ArticleModule,
+    AdminModule,
+    SecurityModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

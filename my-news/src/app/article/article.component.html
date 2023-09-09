@@ -20,6 +20,12 @@
   <p *ngIf="isDetail" class="text-justify my-3">
     {{ article.content }}
   </p>
+  <div [ngSwitch]="color">
+    <div *ngSwitchCase="'green'" class="text-green-600">GREEN</div>
+    <div *ngSwitchCase="'red'" class="text-red-500">RED</div>
+    <div *ngSwitchCase="'blue'" class="text-blue-500">BLUE</div>
+    <div *ngSwitchDefault class="gray">DEFAULT</div>
+  </div>
   <p class="py-2">
     <button
       (click)="detail(article.id)"

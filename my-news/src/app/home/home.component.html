@@ -1,14 +1,14 @@
 <h1 class="text-4xl">Welcome home</h1>
 
 <div
-  *ngIf="articles.length !== 0"
+  *ngIf="(articles$ | async)?.length !== 0"
   class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mx-auto py-6"
 >
   <app-article
-    *ngFor="let article of articles"
+    *ngFor="let article of articles$ | async"
     [article]="article"
   ></app-article>
 </div>
-<div *ngIf="articles.length === 0">
+<div *ngIf="(articles$ | async)?.length === 0">
   <p>No articles found!</p>
 </div>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Article } from '../article';
+import { Article } from './article';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,9 +17,12 @@ export class ArticleComponent implements OnInit {
     content: '',
     author: '',
     publishDate: '',
+    categoryId: 0,
+    statusId: 0,
   };
   @Input() isDetail: boolean = false;
-  protected readonly navigator = navigator;
+
+  protected color: string = 'blue';
 
   constructor(private router: Router) {}
 
