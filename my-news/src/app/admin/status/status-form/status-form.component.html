@@ -1,0 +1,62 @@
+<div
+  *ngIf="isSubmitted && errorMessage"
+  class="rounded p-4 mb-4 text-lg bg-red-200 text-red-800 border-2 border-red-300"
+>
+  {{ errorMessage }}
+</div>
+<div
+  class="rounded p-4 mb-4 text-lg bg-yellow-400 text-orange-700 border-2 border-yellow-500"
+>
+  {{ statusForm.status }}
+  <p>{{ nameChangeMessage }}</p>
+</div>
+<form (ngSubmit)="onSubmit()" [formGroup]="statusForm">
+  <div class="mb-6">
+    <label class="block mb-2 text-sm font-medium text-gray-900" for="name"
+      >Name</label
+    >
+    <input
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      formControlName="name"
+      id="name"
+      minlength="2"
+      name="name"
+      placeholder="Name"
+      type="name"
+    />
+    <div
+      *ngIf="statusForm.controls.name.errors?.['oneCapitalLetter']"
+      class="text-red-500 mt-2"
+    >
+      Status name must have at least 1 upper case character
+    </div>
+  </div>
+  <div class="mb-6 flex items-center">
+    <input
+      class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600"
+      formControlName="active"
+      id="active"
+      name="active"
+      type="checkbox"
+    />
+    <label class="ml-2 text-sm font-medium text-gray-900" for="active"
+      >Active</label
+    >
+  </div>
+  <button
+    *ngIf="isAdd"
+    [disabled]="!statusForm.valid || isSubmitted"
+    class="text-white bg-blue-700 enabled:hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75"
+    type="submit"
+  >
+    Add
+  </button>
+  <button
+    *ngIf="isEdit"
+    [disabled]="!statusForm.valid || isSubmitted"
+    class="text-white bg-blue-700 enabled:hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75"
+    type="submit"
+  >
+    Save
+  </button>
+</form>
