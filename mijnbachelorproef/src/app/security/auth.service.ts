@@ -16,21 +16,7 @@ export class AuthService {
 
   getUser(): User | null {
     if (this.isLoggedIn()) {
-      return {
-        userId: parseInt(localStorage.getItem('userid') ?? '0'),
-        email: localStorage.getItem('email') ?? '',
-        userName: localStorage.getItem('username') ?? '',
-        password: '',
-        firstName: localStorage.getItem('firstname') ?? '',
-        lastName: localStorage.getItem('lastname') ?? '',
-        programType: localStorage.getItem('programtype') ?? '',
-        userLevel: localStorage.getItem('userlevel') ?? '',
-        expertise: localStorage.getItem('expertise') ?? '',
-        token: this.getToken(),
-        studentProjects: null,
-        coachProjects: null,
-        userTopics: null,
-      };
+      return JSON.parse(localStorage.getItem('user') ?? '{}');
     } else {
       return null;
     }
@@ -40,19 +26,23 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
+  deleteUser(): void {
+    localStorage.removeItem('user');
+  }
+
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 
-  authenticate(user: User): Observable<UserResponse> {
-    return this.httpClient.post<UserResponse>(
+  authenticate(user: User): Observable<User> {
+    return this.httpClient.post<User>(
       'https://localhost:7026/api/users/authenticate',
       user,
     );
   }
 
-  register(user: User): Observable<UserResponse> {
-    return this.httpClient.post<UserResponse>(
+  register(user: User): Observable<User> {
+    return this.httpClient.post<User>(
       'https://localhost:7026/api/users/register',
       user,
     );
