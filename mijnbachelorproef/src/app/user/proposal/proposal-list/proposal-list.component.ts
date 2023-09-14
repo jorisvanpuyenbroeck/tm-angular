@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./proposal-list.component.css'],
 })
 export class UserProposalListComponent implements OnInit {
+  color: String = 'primary';
   proposals: Proposal[] = [];
   proposals$: Subscription = new Subscription();
 

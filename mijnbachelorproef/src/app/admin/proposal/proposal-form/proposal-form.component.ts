@@ -19,6 +19,7 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
     description: '',
     origin: '',
   };
+  origins: string[] = ['student', 'docent', 'werkveld'];
 
   isSubmitted: boolean = false;
   errorMessage: string = '';

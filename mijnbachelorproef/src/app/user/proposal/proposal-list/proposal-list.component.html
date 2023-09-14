@@ -1,9 +1,23 @@
 <div *ngFor="let proposal of proposals">
-  <h1>{{ proposal.title }}</h1>
-  <p>
-    {{ proposal.description }}
-  </p>
-  <p>
-    {{ proposal.origin }}
-  </p>
+  <mat-card class="m-3 p-3">
+    <h1>
+      {{ proposal.title }}
+      <button
+        [color]="
+          proposal.origin === 'docent'
+            ? 'primary'
+            : proposal.origin === 'student'
+            ? 'accent'
+            : 'warn'
+        "
+        mat-flat-button
+      >
+        {{ proposal.origin }}
+      </button>
+    </h1>
+
+    <p>
+      {{ proposal.description }}
+    </p>
+  </mat-card>
 </div>
