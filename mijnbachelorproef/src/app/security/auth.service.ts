@@ -27,6 +27,9 @@ export class AuthService {
         userLevel: localStorage.getItem('userlevel') ?? '',
         expertise: localStorage.getItem('expertise') ?? '',
         token: this.getToken(),
+        studentProjects: null,
+        coachProjects: null,
+        userTopics: null,
       };
     } else {
       return null;
@@ -43,14 +46,14 @@ export class AuthService {
 
   authenticate(user: User): Observable<UserResponse> {
     return this.httpClient.post<UserResponse>(
-      'http://localhost:3000/login',
+      'https://localhost:7026/api/users/authenticate',
       user,
     );
   }
 
   register(user: User): Observable<UserResponse> {
     return this.httpClient.post<UserResponse>(
-      'http://localhost:3000/register',
+      'https://localhost:7026/api/users/register',
       user,
     );
   }

@@ -7,6 +7,7 @@ import { AdminTopicFormComponent } from './admin/topic/topic-form/topic-form.com
 import { UserProposalListComponent } from './user/proposal/proposal-list/proposal-list.component';
 import { AdminProposalListComponent } from './admin/proposal/proposal-list/proposal-list.component';
 import { AdminProposalFormComponent } from './admin/proposal/proposal-form/proposal-form.component';
+import { SecurityComponent } from './security/security/security.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,9 @@ const routes: Routes = [
   { path: 'admin/topic/form', component: AdminTopicFormComponent },
   { path: 'admin/proposal', component: AdminProposalListComponent },
   { path: 'admin/proposal/form', component: AdminProposalFormComponent },
+  { path: 'login', component: SecurityComponent },
+  { path: 'register', component: SecurityComponent },
+  { path: 'logout', component: SecurityComponent },
 ];
 
 @NgModule({

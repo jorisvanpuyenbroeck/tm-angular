@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
+import { NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { SecurityModule } from './security/security.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, MenuComponent],
@@ -19,6 +22,9 @@ import { UserModule } from './user/user.module';
     SharedModule,
     UserModule,
     AdminModule,
+    NgIf,
+    RouterLink,
+    SecurityModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

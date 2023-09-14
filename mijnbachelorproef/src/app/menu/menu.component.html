@@ -111,6 +111,36 @@
             </ul>
           </div>
         </li>
+        <li *ngIf="!authService.isLoggedIn()">
+          <a
+            (click)="onHamburgerItemClick()"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="block py-2 pr-4 pl-3 rounded"
+            routerLink="/login"
+            routerLinkActive="active"
+            >Login</a
+          >
+        </li>
+        <li *ngIf="!authService.isLoggedIn()">
+          <a
+            (click)="onHamburgerItemClick()"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="block py-2 pr-4 pl-3 rounded"
+            routerLink="/register"
+            routerLinkActive="active"
+            >Register</a
+          >
+        </li>
+        <li *ngIf="authService.isLoggedIn()">
+          <a
+            (click)="onHamburgerItemClick()"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="block py-2 pr-4 pl-3 rounded"
+            routerLink="/logout"
+            routerLinkActive="active"
+            >Logout</a
+          >
+        </li>
       </ul>
     </div>
   </div>

@@ -9,4 +9,7 @@ export interface User {
   userLevel: string;
   expertise: string;
   token: string;
+  studentProjects: null;
+  coachProjects: null;
+  userTopics: null;
 }
