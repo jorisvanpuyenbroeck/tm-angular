@@ -5,6 +5,8 @@ import { UserTopicListComponent } from './user/topic/topic-list/topic-list.compo
 import { AdminTopicListComponent } from './admin/topic/topic-list/topic-list.component';
 import { AdminTopicFormComponent } from './admin/topic/topic-form/topic-form.component';
 import { UserProposalListComponent } from './user/proposal/proposal-list/proposal-list.component';
+import { AdminProposalListComponent } from './admin/proposal/proposal-list/proposal-list.component';
+import { AdminProposalFormComponent } from './admin/proposal/proposal-form/proposal-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'proposals', component: UserProposalListComponent },
   { path: 'admin/topic', component: AdminTopicListComponent },
   { path: 'admin/topic/form', component: AdminTopicFormComponent },
+  { path: 'admin/proposal', component: AdminProposalListComponent },
+  { path: 'admin/proposal/form', component: AdminProposalFormComponent },
 ];
 
 @NgModule({

@@ -37,7 +37,7 @@ export class ProposalService {
 
   deleteProposal(id: number): Observable<Proposal> {
     return this.httpClient.delete<Proposal>(
-      'https://localhost:3000/api/proposals/' + id,
+      'https://localhost:7026/api/proposals/' + id,
     );
   }
 }

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './proposal-list.component.html',
   styleUrls: ['./proposal-list.component.css'],
 })
-export class ProposalListComponent implements OnInit {
+export class AdminProposalListComponent implements OnInit {
   proposals: Proposal[] = [];
   proposals$: Subscription = new Subscription();
   deleteProposal$: Subscription = new Subscription();
