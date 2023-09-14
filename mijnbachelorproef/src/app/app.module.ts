@@ -5,25 +5,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
-import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
-import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
-import { NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { SecurityModule } from './security/security.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, MenuComponent],
   imports: [
+    CommonModule,
     BrowserModule,
-    AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule,
+    AppRoutingModule,
     SharedModule,
     UserModule,
-    AdminModule,
-    NgIf,
-    RouterLink,
+    CommonModule,
     SecurityModule,
   ],
   providers: [],
