@@ -10,6 +10,8 @@ import { AuthService } from '../security/auth.service';
 export class MenuComponent implements OnInit {
   hamburgerOpen = false;
   adminDropdownOpen = false;
+  coachDropdownOpen = false;
+  studentDropdownOpen = false;
 
   constructor(
     public authService: AuthService,
@@ -34,6 +36,22 @@ export class MenuComponent implements OnInit {
 
   closeAdminDropDown() {
     this.adminDropdownOpen = false;
+  }
+
+  onCoachDropDownClick() {
+    this.coachDropdownOpen = !this.coachDropdownOpen;
+  }
+
+  closeCoachDropDown() {
+    this.coachDropdownOpen = false;
+  }
+
+  onStudentDropDownClick() {
+    this.studentDropdownOpen = !this.studentDropdownOpen;
+  }
+
+  closeStudentDropDown() {
+    this.studentDropdownOpen = false;
   }
 
   navigateTo(path: string) {

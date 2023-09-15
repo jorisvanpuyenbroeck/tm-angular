@@ -34,6 +34,18 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
+  isAdmin(): boolean {
+    return this.getUser()?.userLevel === 'admin';
+  }
+
+  isStudent(): boolean {
+    return this.getUser()?.userLevel === 'student';
+  }
+
+  isCoach(): boolean {
+    return this.getUser()?.userLevel === 'coach';
+  }
+
   authenticate(user: User): Observable<User> {
     return this.httpClient.post<User>(
       'https://localhost:7026/api/users/authenticate',

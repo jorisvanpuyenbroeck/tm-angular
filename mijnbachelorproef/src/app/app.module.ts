@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { SecurityModule } from './security/security.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, MenuComponent],
@@ -24,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     UserModule,
     CommonModule,
     SecurityModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

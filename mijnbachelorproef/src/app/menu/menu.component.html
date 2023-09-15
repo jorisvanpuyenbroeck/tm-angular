@@ -1,7 +1,7 @@
-<nav class="bg-white border-gray-200 py-2.5 border-b">
-  <div class="container flex flex-wrap justify-between items-center">
+<nav class="bg-white border-gray-200 border-b">
+  <div class="flex flex-wrap justify-between items-center">
     <a class="flex items-center" href="/">
-      <div class="text-2xl">Mijn bachelorproef</div>
+      <div class="px-6 text-2xl">Mijn bachelorproef</div>
     </a>
     <button
       (click)="toggleHamburger()"
@@ -94,7 +94,101 @@
             >Logout</a
           >
         </li>
-        <li *ngIf="authService.isLoggedIn()">
+        <li *ngIf="authService.isLoggedIn() && authService.isStudent()">
+          <button
+            (click)="onStudentDropDownClick()"
+            class="flex justify-between items-center py-2 pr-4 pl-3 w-full"
+            id="dropdownStudentNavbarLink"
+          >
+            Student
+            <svg
+              aria-hidden="true"
+              class="ml-1 w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <!-- Dropdown menu -->
+          <div
+            (mouseleave)="closeStudentDropDown()"
+            *ngIf="studentDropdownOpen"
+            class="z-10 w-44 font-normal shadow bg-white rounded-md py-1 absolute top-12 right-0"
+            id="dropdownStudentNavbar"
+          >
+            <ul
+              aria-labelledby="dropdownLargeButton"
+              class="py-1 text-sm text-gray-700"
+            >
+              <li>
+                <a
+                  (click)="navigateTo('student/topic')"
+                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >Topics</a
+                >
+                <a
+                  (click)="navigateTo('student/proposal')"
+                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >Proposals</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li *ngIf="authService.isLoggedIn() && authService.isCoach()">
+          <button
+            (click)="onCoachDropDownClick()"
+            class="flex justify-between items-center py-2 pr-4 pl-3 w-full"
+            id="dropdownCoachNavbarLink"
+          >
+            Coach
+            <svg
+              aria-hidden="true"
+              class="ml-1 w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <!-- Dropdown menu -->
+          <div
+            (mouseleave)="closeCoachDropDown()"
+            *ngIf="coachDropdownOpen"
+            class="z-10 w-44 font-normal shadow bg-white rounded-md py-1 absolute top-12 right-0"
+            id="dropdownCoachNavbar"
+          >
+            <ul
+              aria-labelledby="dropdownLargeButton"
+              class="py-1 text-sm text-gray-700"
+            >
+              <li>
+                <a
+                  (click)="navigateTo('coach/topic')"
+                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >Topics</a
+                >
+                <a
+                  (click)="navigateTo('coach/proposal')"
+                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >Proposals</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li *ngIf="authService.isLoggedIn() && authService.isAdmin()">
           <button
             (click)="onAdminDropDownClick()"
             class="flex justify-between items-center py-2 pr-4 pl-3 w-full"

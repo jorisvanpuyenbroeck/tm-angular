@@ -1,8 +1,12 @@
-<div *ngFor="let topic of topics">
-  <mat-card class="m-3 p-3">
-    <h1>{{ topic.name }}</h1>
-    <p>
-      {{ topic.description }}
-    </p>
-  </mat-card>
+<div
+  class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 justify-between"
+>
+  <div *ngFor="let topic of topics">
+    <mat-card class="p-3">
+      <h1>{{ topic.name }}</h1>
+      <p>
+        {{ topic.description }}
+      </p>
+    </mat-card>
+  </div>
 </div>
