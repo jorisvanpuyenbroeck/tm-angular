@@ -28,4 +28,8 @@ export class UserProposalListComponent implements OnInit {
       .getProposals()
       .subscribe((result) => (this.proposals = result));
   }
+
+  openProposal(proposal: Proposal) {
+    console.log('get proposal');
+  }
 }

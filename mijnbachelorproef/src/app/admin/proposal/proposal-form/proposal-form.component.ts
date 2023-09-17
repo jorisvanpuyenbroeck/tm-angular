@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Proposal } from '../../../proposal';
 import { ProposalService } from '../proposal.service';
+import { TopicService } from '../../topic/topic.service';
+import { Topic } from '../../../topic';
 
 @Component({
   selector: 'app-proposal-form',
@@ -13,13 +15,18 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
   isAdd: boolean = false;
   isEdit: boolean = false;
   proposalId: number = 0;
+  origins: string[] = ['student', 'docent', 'werkveld'];
+  allTopics: Topic[] = [];
+
   proposal: Proposal = {
     proposalId: 0,
     title: '',
     description: '',
     origin: '',
+    topics: [],
+    projects: [],
+    users: [],
   };
-  origins: string[] = ['student', 'docent', 'werkveld'];
 
   isSubmitted: boolean = false;
   errorMessage: string = '';
@@ -27,10 +34,12 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
   proposal$: Subscription = new Subscription();
   postProposal$: Subscription = new Subscription();
   putProposal$: Subscription = new Subscription();
+  allTopics$: Subscription = new Subscription();
 
   constructor(
     private router: Router,
     private proposalService: ProposalService,
+    private topicService: TopicService,
   ) {
     this.isAdd =
       this.router.getCurrentNavigation()?.extras.state?.['mode'] === 'add';
@@ -46,7 +55,13 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
       this.proposal$ = this.proposalService
         .getProposalById(this.proposalId)
         .subscribe((result) => (this.proposal = result));
+
+      // console.log(this.proposal);
     }
+
+    this.allTopics$ = this.topicService.getTopics().subscribe((result) => {
+      this.allTopics = result.map((t) => t);
+    });
   }
 
   ngOnInit(): void {}
@@ -68,12 +83,14 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
         });
     }
     if (this.isEdit) {
+      // console.log(this.proposal);
       this.putProposal$ = this.proposalService
         .putProposal(this.proposalId, this.proposal)
         .subscribe({
           next: (v) => this.router.navigateByUrl('/admin/proposal'),
           error: (e) => (this.errorMessage = e.message),
         });
+      //console.log(this.proposal);
     }
   }
 }

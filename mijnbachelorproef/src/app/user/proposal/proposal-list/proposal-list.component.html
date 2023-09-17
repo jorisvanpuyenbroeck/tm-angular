@@ -2,26 +2,34 @@
   class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 justify-between"
 >
   <div *ngFor="let proposal of proposals">
-    <mat-card class="p-3">
-      <h1>
-        {{ proposal.title }}
-        <button
-          [color]="
-            proposal.origin === 'docent'
-              ? 'primary'
-              : proposal.origin === 'student'
-              ? 'accent'
-              : 'warn'
-          "
-          mat-flat-button
-        >
+    <mat-card>
+      <mat-card-header class="flex flex-col">
+        <mat-card-title>
+          {{ proposal.title }}
+        </mat-card-title>
+        <div class="my-2 p-2 bg-red-100 rounded">
           {{ proposal.origin }}
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          {{ proposal.description }}
+        </p>
+      </mat-card-content>
+      <mat-card-subtitle>
+        <div class="my-2 p-2 rounded">
+          <div *ngFor="let topic of proposal.topics">{{ topic.name }} ,</div>
+        </div>
+      </mat-card-subtitle>
+      <mat-card-actions class="flex justify-end">
+        <button
+          (click)="openProposal(proposal)"
+          color="basic"
+          mat-stroked-button
+        >
+          Details
         </button>
-      </h1>
-
-      <p>
-        {{ proposal.description }}
-      </p>
+      </mat-card-actions>
     </mat-card>
   </div>
 </div>

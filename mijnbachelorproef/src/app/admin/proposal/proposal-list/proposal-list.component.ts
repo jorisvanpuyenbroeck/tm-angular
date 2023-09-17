@@ -3,6 +3,7 @@ import { Proposal } from '../../../proposal';
 import { ProposalService } from '../proposal.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Topic } from '../../../topic';
 
 @Component({
   selector: 'app-proposal-list',
@@ -51,5 +52,9 @@ export class AdminProposalListComponent implements OnInit {
       next: (v) => this.getProposals(),
       error: (e) => (this.errorMessage = e.message),
     });
+  }
+
+  getNames(topics: Topic[]) {
+    return topics.map((t) => t.name).join(', ');
   }
 }

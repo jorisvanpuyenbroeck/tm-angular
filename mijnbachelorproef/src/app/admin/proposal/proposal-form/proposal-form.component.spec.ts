@@ -1,16 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProposalFormComponent } from './proposal-form.component';
+import { AdminProposalFormComponent } from './proposal-form.component';
+import { AdminProposalListComponent } from '../proposal-list/proposal-list.component';
 
 describe('ProposalFormComponent', () => {
-  let component: ProposalFormComponent;
-  let fixture: ComponentFixture<ProposalFormComponent>;
+  let component: AdminProposalFormComponent;
+  let fixture: ComponentFixture<AdminProposalFormComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ProposalFormComponent]
+      declarations: [AdminProposalFormComponent],
     });
-    fixture = TestBed.createComponent(ProposalFormComponent);
+    fixture = TestBed.createComponent(AdminProposalFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

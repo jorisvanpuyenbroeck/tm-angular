@@ -50,17 +50,7 @@
     <label class="block mb-2 text-sm font-medium text-gray-900" for="title"
       >Origin</label
     >
-    <!--    <input
-          #origin="ngModel"
-          [(ngModel)]="proposal.origin"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          id="origin"
-          name="origin"
-          placeholder="Origin"
-          required
-          type="text"
-        />-->
-    <select
+    <mat-select
       #origin="ngModel"
       [(ngModel)]="proposal.origin"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -68,11 +58,29 @@
       name="origin"
       required
     >
-      <option *ngFor="let o of origins" [ngValue]="o">{{ o }}</option>
-    </select>
+      <mat-option *ngFor="let o of origins" [value]="o">{{ o }}</mat-option>
+    </mat-select>
     <div [hidden]="origin.valid || origin.pristine" class="text-red-500 mt-2">
       Origin is required
     </div>
+  </div>
+  <div class="mb-6">
+    <label class="block mb-2 text-sm font-medium text-gray-900" for="title"
+      >Topics</label
+    >
+    <mat-select
+      #topics="ngModel"
+      [(ngModel)]="proposal.topics"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      id="topics"
+      multiple
+      name="topics"
+      placeholder="Select topics"
+    >
+      <mat-option *ngFor="let topic of allTopics" [value]="proposal.topics">
+        {{ topic.name }}
+      </mat-option>
+    </mat-select>
   </div>
 
   <button
