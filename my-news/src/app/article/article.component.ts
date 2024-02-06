@@ -22,7 +22,7 @@ export class ArticleComponent implements OnInit {
   };
   @Input() isDetail: boolean = false;
 
-  protected color: string = 'blue';
+  protected color: string = 'red';
 
   constructor(private router: Router) {}
 

@@ -27,6 +27,8 @@ export class ArticleDetailComponent implements OnInit {
     private route: ActivatedRoute,
   ) {}
 
+  // create a private variable test boolean
+
   ngOnInit(): void {
     const articleId = this.route.snapshot.paramMap.get('id');
     if (articleId != null) {
