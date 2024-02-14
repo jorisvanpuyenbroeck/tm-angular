@@ -55,6 +55,16 @@
           >
         </li>
         <li>
+          <a
+            (click)="onHamburgerItemClick()"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="block py-2 pr-4 pl-3 rounded"
+            routerLink="/contact"
+            routerLinkActive="active"
+          >Contact</a
+          >
+        </li>
+        <li>
           <button
             (click)="onAdminDropDownClick()"
             class="flex justify-between items-center py-2 pr-4 pl-3 w-full"

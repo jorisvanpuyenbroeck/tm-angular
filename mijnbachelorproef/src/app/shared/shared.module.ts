@@ -7,9 +7,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { LoginButtonComponent } from './login-button/login-button.component';
+import { SignupButtonComponent } from './signup-button/signup-button.component';
+import { LogoutButtonComponent } from './logout-button/logout-button.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     FormsModule,
     ReactiveFormsModule,

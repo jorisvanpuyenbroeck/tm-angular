@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../security/auth.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +10,9 @@ export class HomeComponent {
 
   constructor(private authService: AuthService) {}
 
-  user = this.authService.getUser();
+//  user = this.authService.getUser();
 
-  isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
-  }
+  // isLoggedIn(): boolean {
+  //   return this.authService.isLoggedIn();
+  // }
 }

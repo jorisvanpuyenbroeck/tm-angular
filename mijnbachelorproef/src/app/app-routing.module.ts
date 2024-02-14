@@ -6,7 +6,7 @@ import { UserProposalListComponent } from './user/proposal/proposal-list/proposa
 import { SecurityComponent } from './security/security/security.component';
 import { AuthGuard } from './security/auth.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'topics', component: UserTopicListComponent },
   { path: 'proposals', component: UserProposalListComponent },
