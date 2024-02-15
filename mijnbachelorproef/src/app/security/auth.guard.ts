@@ -1,43 +1,16 @@
-import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanActivateChild,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
-import { Observable } from 'rxjs';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGuard implements CanActivate, CanActivateChild {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {}
+export const AuthGuard: CanActivateFn = () => {
+  const authService: AuthService = inject(AuthService);
+  const router: Router = inject(Router);
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): boolean | UrlTree {
-    return this.checkRoute();
+  if (authService.isAuthenticated()) {
+    // If the user is authenticated, allow access to the route
+    return true;
+  } else {
+    // If the user is not authenticated, redirect to the login page
+    return router.createUrlTree(['/login']);
   }
-
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): boolean | UrlTree {
-    return this.checkRoute();
-  }
-
-  checkRoute(): boolean | UrlTree {
-    if (this.authService.isLoggedIn()) {
-      return true;
-    } else {
-      return this.router.parseUrl('/login');
-    }
-  }
-}
+};
