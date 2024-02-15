@@ -17,14 +17,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {LoginButtonComponent} from "./shared/login-button/login-button.component";
 import {SignupButtonComponent} from "./shared/signup-button/signup-button.component";
 import {LogoutButtonComponent} from "./shared/logout-button/logout-button.component";
+import {ProposalService} from "./user/proposal/proposal.service";
+import {TopicService} from "./user/topic/topic.service";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, MenuComponent],
   imports: [
-    CommonModule,
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
     AuthModule.forRoot({
       domain: 'dev-toowwl21qlfjeu6w.eu.auth0.com',
       clientId: 'U9OMeyZVRGhl9L0uS7A7jwvuDCYW0ca9',
@@ -33,9 +31,16 @@ import {LogoutButtonComponent} from "./shared/logout-button/logout-button.compon
         redirect_uri: window.location.origin
       },
       httpInterceptor: {
-        allowedList: [`${environment.api_url}/proposals`]
+        allowedList: [
+          `${environment.api_url}/proposals`, // allow requests to our API,
+          `${environment.api_url}/topics` // allow requests to our API,
+        ]
       }
     }),
+    CommonModule,
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
     UserModule,
@@ -46,8 +51,11 @@ import {LogoutButtonComponent} from "./shared/logout-button/logout-button.compon
     LogoutButtonComponent,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
-  ],
+    { provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true
+    },
+],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

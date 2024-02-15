@@ -7,7 +7,8 @@ import { AuthGuard } from '@auth0/auth0-angular';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'topics', component: UserTopicListComponent },
+  { path: 'topics', component: UserTopicListComponent,
+    canActivate: [AuthGuard] },
   { path: 'proposals', component: UserProposalListComponent,
     canActivate: [AuthGuard] },
 ];
