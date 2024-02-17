@@ -5,7 +5,7 @@ import { Topic } from '../../../topic';
 import { TopicService } from '../topic.service';
 
 @Component({
-  selector: 'app-topic-form',
+  selector: 'app-admin-topic-form',
   templateUrl: './topic-form.component.html',
   styleUrls: ['./topic-form.component.css'],
 })

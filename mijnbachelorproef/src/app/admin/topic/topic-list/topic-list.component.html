@@ -1,6 +1,5 @@
 <div class="container mx-auto mt-8">
-  <div
-    *ngIf="errorMessage"
+  <div *ngIf="errorMessage"
     class="rounded p-4 mb-4 text-lg bg-red-200 text-red-800 border-2 border-red-300"
   >
     {{ errorMessage }}
@@ -49,9 +48,7 @@
         <tbody class="bg-white">
           <tr *ngFor="let topic of topics">
             <td class="px-6 py-4 border-b border-gray-200">
-              <div class="flex items-center">
-                {{ topic.topicId }}
-              </div>
+              <div class="flex items-center">{{ topic.topicId }}</div>
             </td>
 
             <td class="px-6 py-4 border-b border-gray-200">

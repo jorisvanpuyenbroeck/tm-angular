@@ -19,6 +19,7 @@ import {SignupButtonComponent} from "./shared/signup-button/signup-button.compon
 import {LogoutButtonComponent} from "./shared/logout-button/logout-button.component";
 import {ProposalService} from "./user/proposal/proposal.service";
 import {TopicService} from "./user/topic/topic.service";
+import {AdminModule} from "./admin/admin.module";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, MenuComponent],
@@ -37,7 +38,6 @@ import {TopicService} from "./user/topic/topic.service";
         ]
       }
     }),
-    CommonModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -45,7 +45,7 @@ import {TopicService} from "./user/topic/topic.service";
     SharedModule,
     UserModule,
     CommonModule,
-    MatToolbarModule,
+    AdminModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,

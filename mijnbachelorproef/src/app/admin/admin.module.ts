@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { TopicModule } from './topic/topic.module';
-import { ProposalModule } from './proposal/proposal.module';
-import { AdminRoutingModule } from './admin-routing.module';
+import {AdminTopicListComponent} from "./topic/topic-list/topic-list.component";
+import {AdminTopicFormComponent} from "./topic/topic-form/topic-form.component";
+import {AdminProposalListComponent} from "./proposal/proposal-list/proposal-list.component";
+import {AdminProposalFormComponent} from "./proposal/proposal-form/proposal-form.component";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
-  declarations: [],
-  imports: [SharedModule, AdminRoutingModule, TopicModule, ProposalModule],
-  exports: [TopicModule, ProposalModule],
+  declarations: [AdminTopicListComponent, AdminTopicFormComponent, AdminProposalListComponent, AdminProposalFormComponent],
+  imports: [SharedModule],
+  exports: [AdminTopicListComponent, AdminTopicFormComponent, AdminProposalListComponent, AdminProposalFormComponent],
 })
 export class AdminModule {}

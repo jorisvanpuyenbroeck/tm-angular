@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-topic-list',
+  selector: 'app-admin-topic-list',
   templateUrl: './topic-list.component.html',
   styleUrls: ['./topic-list.component.css'],
 })

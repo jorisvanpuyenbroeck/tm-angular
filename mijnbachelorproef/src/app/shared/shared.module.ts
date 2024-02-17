@@ -11,6 +11,7 @@ import { LoginButtonComponent } from './login-button/login-button.component';
 import { SignupButtonComponent } from './signup-button/signup-button.component';
 import { LogoutButtonComponent } from './logout-button/logout-button.component';
 import {RoleService} from "../security/role.service";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {RoleService} from "../security/role.service";
     LogoutButtonComponent,
   ],
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -26,7 +28,8 @@ import {RoleService} from "../security/role.service";
     MatOptionModule,
     MatIconModule,
     MatSelectModule,
+    MatToolbarModule,
   ],
-  exports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule, LoginButtonComponent, SignupButtonComponent, LogoutButtonComponent],
+  exports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule, LoginButtonComponent, SignupButtonComponent, LogoutButtonComponent, MatOptionModule, MatIconModule, MatSelectModule, MatInputModule, MatButtonModule, MatToolbarModule],
 })
 export class SharedModule {}
