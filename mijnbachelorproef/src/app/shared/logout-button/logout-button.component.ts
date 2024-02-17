@@ -5,8 +5,6 @@ import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-logout-button',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './logout-button.component.html',
   styleUrls: ['./logout-button.component.css']
 })

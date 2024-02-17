@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup-button',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './signup-button.component.html',
   styleUrls: ['./signup-button.component.css']
 })

@@ -46,9 +46,6 @@ import {TopicService} from "./user/topic/topic.service";
     UserModule,
     CommonModule,
     MatToolbarModule,
-    LoginButtonComponent,
-    SignupButtonComponent,
-    LogoutButtonComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,

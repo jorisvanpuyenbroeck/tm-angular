@@ -10,9 +10,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { LoginButtonComponent } from './login-button/login-button.component';
 import { SignupButtonComponent } from './signup-button/signup-button.component';
 import { LogoutButtonComponent } from './logout-button/logout-button.component';
+import {RoleService} from "../security/role.service";
 
 @NgModule({
   declarations: [
+    LoginButtonComponent,
+    SignupButtonComponent,
+    LogoutButtonComponent,
   ],
   imports: [
     FormsModule,
@@ -23,6 +27,6 @@ import { LogoutButtonComponent } from './logout-button/logout-button.component';
     MatIconModule,
     MatSelectModule,
   ],
-  exports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule],
+  exports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule, LoginButtonComponent, SignupButtonComponent, LogoutButtonComponent],
 })
 export class SharedModule {}

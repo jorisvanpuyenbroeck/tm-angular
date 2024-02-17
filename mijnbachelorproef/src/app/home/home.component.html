@@ -3,8 +3,9 @@
   <h1>Welcome </h1>
 
   <p>This is the homepage of our future bp app!</p>
-  <app-login-button></app-login-button>
-  <app-signup-button></app-signup-button>
-  <app-logout-button></app-logout-button>
+
+  <app-login-button *ngIf=!isAuthenticated()></app-login-button>
+  <app-signup-button *ngIf=!isAuthenticated()></app-signup-button>
+  <app-logout-button *ngIf=isAuthenticated()></app-logout-button>
 
 </div>
