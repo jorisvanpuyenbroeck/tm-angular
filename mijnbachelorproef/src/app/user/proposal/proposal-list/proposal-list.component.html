@@ -2,12 +2,19 @@
   class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 justify-between"
 >
   <div *ngFor="let proposal of proposals">
-    <mat-card>
+    <mat-card class="relative">
+      <div class="pin"></div>
+
+      <div [ngClass]="{
+        'triangle-green': proposal.origin === 'student',
+        'triangle-red': proposal.origin === 'docent',
+        'triangle-blue': proposal.origin === 'werkveld'
+      }"></div>
       <mat-card-header class="flex flex-col">
         <mat-card-title>
           {{ proposal.title }}
         </mat-card-title>
-        <div class="my-2 p-2 bg-red-100 rounded">
+        <div class="my-2 p-2 rounded border-t-2 border-b-2 border-dotted">
           {{ proposal.origin }}
         </div>
       </mat-card-header>
@@ -16,18 +23,14 @@
           {{ proposal.description }}
         </p>
       </mat-card-content>
-      <mat-card-subtitle>
-        <div class="my-2 p-2 rounded">
-          <div *ngFor="let topic of proposal.topics">{{ topic.name }} ,</div>
-        </div>
-      </mat-card-subtitle>
+      <mat-card-content>
+          <div class="my-2">
+            <div *ngFor="let topic of proposal.topics" class="label">{{ topic.name }}</div>
+          </div>
+      </mat-card-content>
       <mat-card-actions class="flex justify-end">
-        <button
-          (click)="openProposal(proposal)"
-          color="basic"
-          mat-stroked-button
-        >
-          Details
+        <button>
+          <i class="fas fa-star icon"></i>
         </button>
       </mat-card-actions>
     </mat-card>

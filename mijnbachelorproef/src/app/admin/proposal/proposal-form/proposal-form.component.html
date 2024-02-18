@@ -77,7 +77,7 @@
       name="topics"
       placeholder="Select topics"
     >
-      <mat-option *ngFor="let topic of allTopics" [value]="proposal.topics">
+      <mat-option *ngFor="let topic of allTopics" [value]="{topicId: topic.topicId}">
         {{ topic.name }}
       </mat-option>
     </mat-select>
