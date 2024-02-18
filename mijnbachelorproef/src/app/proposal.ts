@@ -6,8 +6,6 @@ export interface Proposal {
   proposalId: number;
   title: string;
   description: string;
-  origin: string;
-  topics: Topic[];
-  projects: Project[];
-  users: User[];
+  origin?: string;
+  topics?: Topic[];
 }

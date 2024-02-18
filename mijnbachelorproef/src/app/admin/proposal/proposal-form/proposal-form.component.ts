@@ -5,6 +5,7 @@ import { Proposal } from '../../../proposal';
 import { ProposalService } from '../proposal.service';
 import { TopicService } from '../../topic/topic.service';
 import { Topic } from '../../../topic';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-proposal-form',
@@ -24,8 +25,6 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
     description: '',
     origin: '',
     topics: [],
-    projects: [],
-    users: [],
   };
 
   isSubmitted: boolean = false;
@@ -40,6 +39,7 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
     private router: Router,
     private proposalService: ProposalService,
     private topicService: TopicService,
+    private location: Location
   ) {
     this.isAdd =
       this.router.getCurrentNavigation()?.extras.state?.['mode'] === 'add';
@@ -92,5 +92,9 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
         });
       //console.log(this.proposal);
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

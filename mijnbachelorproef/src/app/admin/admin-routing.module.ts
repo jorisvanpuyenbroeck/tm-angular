@@ -4,6 +4,7 @@ import { AdminTopicListComponent } from './topic/topic-list/topic-list.component
 import { AdminTopicFormComponent } from './topic/topic-form/topic-form.component';
 import { AdminProposalListComponent } from './proposal/proposal-list/proposal-list.component';
 import { AdminProposalFormComponent } from './proposal/proposal-form/proposal-form.component';
+import {AuthGuard} from "@auth0/auth0-angular";
 
 const routes: Routes = [
   { path: 'topic', component: AdminTopicListComponent },

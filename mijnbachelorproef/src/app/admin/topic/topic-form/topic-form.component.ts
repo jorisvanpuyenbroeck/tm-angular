@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Topic } from '../../../topic';
 import { TopicService } from '../topic.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-admin-topic-form',
@@ -25,6 +26,7 @@ export class AdminTopicFormComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private topicService: TopicService,
+    private location: Location
   ) {
     this.isAdd =
       this.router.getCurrentNavigation()?.extras.state?.['mode'] === 'add';
@@ -34,6 +36,7 @@ export class AdminTopicFormComponent implements OnInit, OnDestroy {
 
     if (!this.isAdd && !this.isEdit) {
       this.isAdd = true;
+
     }
 
     if (this.topicId != null && this.topicId > 0) {
@@ -41,6 +44,7 @@ export class AdminTopicFormComponent implements OnInit, OnDestroy {
         .getTopicById(this.topicId)
         .subscribe((result) => (this.topic = result));
     }
+
   }
 
   ngOnInit(): void {}
@@ -68,4 +72,8 @@ export class AdminTopicFormComponent implements OnInit, OnDestroy {
         });
     }
   }
+  goBack() {
+    this.location.back();
+  }
+
 }
