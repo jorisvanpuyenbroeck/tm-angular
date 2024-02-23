@@ -15,7 +15,7 @@
       (click)="toggleHamburger()"
       aria-controls="navbar-default"
       aria-expanded="false"
-      class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+      class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
       data-collapse-toggle="navbar-default"
       type="button"
     >
@@ -36,23 +36,13 @@
     </button>
     <div
       [hidden]="!hamburgerOpen"
-      class="w-full md:block md:w-auto"
+      class="w-full sm:block sm:w-auto"
       id="navbar-default"
     >
       <ul
-        class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white"
+        class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 sm:flex-row sm:space-x-8 sm:mt-0 md:text-sm sm:font-medium sm:border-0 sm:bg-white"
       >
-        <li>
-          <a
-            (click)="onHamburgerItemClick()"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="block py-2 pr-4 pl-3 rounded"
-            routerLink="/"
-            routerLinkActive="active"
-            >Home</a
-          >
-        </li>
-        <li>
+        <li *ngIf="!isAuthenticated() && !isStudent()">
           <a
             (click)="onHamburgerItemClick()"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -62,7 +52,7 @@
             >Topics</a
           >
         </li>
-        <li>
+        <li *ngIf="!isAuthenticated() && !isStudent()">
           <a
             (click)="onHamburgerItemClick()"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -70,6 +60,16 @@
             routerLink="/proposals"
             routerLinkActive="active"
             >Proposals</a
+          >
+        </li>
+        <li *ngIf="!isAuthenticated() && !isStudent()">
+          <a
+                  (click)="onHamburgerItemClick()"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  class="block py-2 pr-4 pl-3 rounded"
+                  routerLink="/organisations"
+                  routerLinkActive="active"
+          >Organisations</a
           >
         </li>
         <li *ngIf=!isAuthenticated()>

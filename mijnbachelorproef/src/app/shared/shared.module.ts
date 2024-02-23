@@ -11,6 +11,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { LoginButtonComponent } from './login-button/login-button.component';
 import { SignupButtonComponent } from './signup-button/signup-button.component';
 import { LogoutButtonComponent } from './logout-button/logout-button.component';
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { LogoutButtonComponent } from './logout-button/logout-button.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatCardModule,
     MatButtonModule,
     MatInputModule,
     MatOptionModule,
@@ -30,6 +32,21 @@ import { LogoutButtonComponent } from './logout-button/logout-button.component';
     MatSelectModule,
     MatToolbarModule,
   ],
-  exports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule, LoginButtonComponent, SignupButtonComponent, LogoutButtonComponent, MatOptionModule, MatIconModule, MatSelectModule, MatInputModule, MatButtonModule, MatToolbarModule],
+  exports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    LoginButtonComponent,
+    SignupButtonComponent,
+    LogoutButtonComponent,
+    MatCardModule,
+    MatOptionModule,
+    MatIconModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    MatToolbarModule
+  ],
 })
 export class SharedModule {}

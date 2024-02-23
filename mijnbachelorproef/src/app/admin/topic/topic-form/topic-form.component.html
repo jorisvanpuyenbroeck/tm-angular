@@ -1,3 +1,4 @@
+<div class="container mx-auto mt-8 mb-8">
 <div
   *ngIf="isSubmitted && errorMessage"
   class="rounded p-4 mb-4 text-lg bg-red-200 text-red-800 border-2 border-red-300"
@@ -5,7 +6,7 @@
   {{ errorMessage }}
 </div>
 <form #topicForm="ngForm" (ngSubmit)="onSubmit()">
-  <div class="mb-6">
+  <div class="m-1 mb-6">
     <label class="block mb-2 text-sm font-medium text-gray-900" for="name"
       >Name</label
     >
@@ -23,7 +24,7 @@
       Name is required
     </div>
   </div>
-  <div class="mb-6">
+  <div class="m-1 mb-6">
     <label class="block mb-2 text-sm font-medium text-gray-900" for="name"
       >Description</label
     >
@@ -50,7 +51,7 @@
   <button
     *ngIf="isAdd"
     [disabled]="!topicForm.valid || isSubmitted"
-    class="text-white bg-blue-700 enabled:hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75"
+    class="m-1 text-white bg-blue-700 enabled:hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75"
     type="submit"
   >
     Add
@@ -58,16 +59,17 @@
   <button
     *ngIf="isEdit"
     [disabled]="!topicForm.form.valid || isSubmitted"
-    class="text-white bg-blue-700 enabled:hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75"
+    class="m-1 text-white bg-blue-700 enabled:hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75"
     type="submit"
   >
     Save
   </button>
   <button
-    class="ml-2 text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75"
+    class="m-1 text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75"
     (click)="goBack()"
   >
     Cancel
   </button>
 
 </form>
+</div>

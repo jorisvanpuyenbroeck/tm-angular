@@ -1,6 +1,7 @@
-<div class="flex flex-col space-y-4 min-h-screen text-black mat-app-background">
+<div class="flex flex-col min-h-screen text-black bg-gray-100">
   <app-menu></app-menu>
-  <div class="px-5">
+  <app-application-flow *ngIf="isAuthenticated() && isStudent()"></app-application-flow>
+  <div class="flex-grow px-5">
     <router-outlet></router-outlet>
   </div>
 </div>

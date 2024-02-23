@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import {SharedModule} from "../shared/shared.module";
+import {SharedModule} from "../../shared/shared.module";
 import { AuthService } from '@auth0/auth0-angular';
-import { RoleService } from '../security/role.service';
+import { RoleService } from '../../security/role.service';
 
 
 
