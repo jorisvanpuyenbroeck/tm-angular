@@ -1,4 +1,4 @@
-import { User } from './security/user';
+import { User } from './user';
 import { Proposal } from './proposal';
 import { Topic } from './topic';
 import { Organisation } from './organisation';

@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminModule } from "./admin/admin.module";
 import { ApplicationFlowComponent } from './header/application-flow/application-flow.component';
 import { ApplicationStageComponent } from './header/application-stage/application-stage.component';
+import {SecurityModule} from "./security/security.module";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, MenuComponent, ApplicationFlowComponent, ApplicationStageComponent],
@@ -38,7 +39,8 @@ import { ApplicationStageComponent } from './header/application-stage/applicatio
     BrowserAnimationsModule,
     SharedModule,
     UserModule,
-    AdminModule
+    AdminModule,
+    SecurityModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,

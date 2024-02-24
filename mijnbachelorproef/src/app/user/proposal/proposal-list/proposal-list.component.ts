@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Proposal } from '../../../proposal';
+import { Proposal } from '../../../models/proposal';
 import { ProposalService } from '../proposal.service';
 import { Subscription } from 'rxjs';
 

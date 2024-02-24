@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Proposal } from '../../../proposal';
+import { Proposal } from '../../../models/proposal';
 import { ProposalService } from '../proposal.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Topic } from '../../../topic';
+import { Topic } from '../../../models/topic';
 
 @Component({
   selector: 'app-proposal-list',

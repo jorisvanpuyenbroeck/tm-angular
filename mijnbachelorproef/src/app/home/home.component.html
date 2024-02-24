@@ -1,8 +1,10 @@
 <div>
 <!--  <h1>Welcome {{ user?.firstName }}</h1>-->
-  <h1>Welcome </h1>
+  <h1>Welcome {{ (user$ | async)?.givenName }}</h1>
 
   <p>This is the homepage of our future bp app!</p>
+
+  <pre>{{ user$ | async | json }}</pre>
 
   <app-login-button *ngIf=!isAuthenticated()></app-login-button>
   <app-signup-button *ngIf=!isAuthenticated()></app-signup-button>

@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
 import {SharedModule} from "../shared/shared.module";
 import { AuthService } from '@auth0/auth0-angular';
+import { UserStore} from "../store/user-store";
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,13 @@ export class HomeComponent {
 
   //Signals https://angular.dev/guide/signals
   isAuthenticated = signal(false);
+  user$;
 
-  constructor(private authService: AuthService) {
+
+  constructor(private authService: AuthService, private userStore: UserStore){
     this.authService.isAuthenticated$.subscribe((auth) => {
       this.isAuthenticated.set(auth);
     });
+    this.user$ = this.userStore.state$;
   }
 }

@@ -1,5 +1,5 @@
 import { Topic } from './topic';
-import { User } from './security/user';
+import { User } from './user';
 import { Project } from './project';
 
 export interface Proposal {

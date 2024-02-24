@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Organisation } from '../../../organisation';
+import { Organisation } from '../../../models/organisation';
 import { OrganisationService } from '../organisation.service';
 import { Subscription } from 'rxjs';
 

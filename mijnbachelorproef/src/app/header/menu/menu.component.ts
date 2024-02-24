@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import {SharedModule} from "../../shared/shared.module";
 import { AuthService } from '@auth0/auth0-angular';
 import { RoleService } from '../../security/role.service';
+import { UserStore } from '../../store/user-store';
+import { Observable } from 'rxjs';
+import {User} from "../../models/user";
 
 
 
@@ -27,11 +28,18 @@ export class MenuComponent implements OnInit {
   isStudent = signal(false);
   isMentor = signal(false);
 
+  // Observables
+  user$: Observable<User>;
+
   constructor(
     public authService: AuthService,
     public roleService: RoleService,
+    private userStore: UserStore,
     private router: Router,
   ) {
+
+    this.user$ = this.userStore.select(state => state);
+
     this.authService.isAuthenticated$.subscribe((auth) => {
       this.isAuthenticated.set(auth);
     });
@@ -49,7 +57,10 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user$ = this.userStore.select(state => state);
+
+  }
 
   toggleHamburger(): void {
     this.hamburgerOpen = !this.hamburgerOpen;

@@ -8,19 +8,14 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { LoginButtonComponent } from './login-button/login-button.component';
-import { SignupButtonComponent } from './signup-button/signup-button.component';
-import { LogoutButtonComponent } from './logout-button/logout-button.component';
-import {MatCardModule} from "@angular/material/card";
+import { MatCardModule } from "@angular/material/card";
+import { StoreModule } from "../store/store.module";
 
 
 @NgModule({
-  declarations: [
-    LoginButtonComponent,
-    SignupButtonComponent,
-    LogoutButtonComponent,
-  ],
+  declarations: [],
   imports: [
+    StoreModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -37,9 +32,6 @@ import {MatCardModule} from "@angular/material/card";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    LoginButtonComponent,
-    SignupButtonComponent,
-    LogoutButtonComponent,
     MatCardModule,
     MatOptionModule,
     MatIconModule,

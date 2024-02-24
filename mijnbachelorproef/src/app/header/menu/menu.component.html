@@ -42,17 +42,17 @@
       <ul
         class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 sm:flex-row sm:space-x-8 sm:mt-0 md:text-sm sm:font-medium sm:border-0 sm:bg-white"
       >
-        <li *ngIf="!isAuthenticated() && !isStudent()">
+        <ng-container *ngIf="isAuthenticated()">
+        <li>
           <a
             (click)="onHamburgerItemClick()"
             [routerLinkActiveOptions]="{ exact: true }"
             class="block py-2 pr-4 pl-3 rounded"
             routerLink="/topics"
             routerLinkActive="active"
-            >Topics</a
-          >
+            >Topics</a>
         </li>
-        <li *ngIf="!isAuthenticated() && !isStudent()">
+        <li>
           <a
             (click)="onHamburgerItemClick()"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -62,7 +62,7 @@
             >Proposals</a
           >
         </li>
-        <li *ngIf="!isAuthenticated() && !isStudent()">
+        <li>
           <a
                   (click)="onHamburgerItemClick()"
                   [routerLinkActiveOptions]="{ exact: true }"
@@ -72,203 +72,211 @@
           >Organisations</a
           >
         </li>
-        <li *ngIf=!isAuthenticated()>
-          <app-login-button ></app-login-button>
-        </li>
-        <li *ngIf=!isAuthenticated()>
-          <app-signup-button></app-signup-button>
-        </li>
-        <li *ngIf="isAuthenticated() && isStudent()">
+        <li *ngIf="isStudent()">
           <button
-            (click)="onStudentDropDownClick()"
-            class="flex justify-between items-center py-2 pr-4 pl-3 w-full"
-            id="dropdownStudentNavbarLink"
+                  (click)="onStudentDropDownClick()"
+                  class="flex justify-between items-center py-2 pr-4 pl-3 w-full"
+                  id="dropdownStudentNavbarLink"
           >
             Student
             <svg
-              aria-hidden="true"
-              class="ml-1 w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    class="ml-1 w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                clip-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      fill-rule="evenodd"
               ></path>
             </svg>
           </button>
           <!-- Dropdown menu -->
           <div
-            (mouseleave)="closeStudentDropDown()"
-            *ngIf="studentDropdownOpen"
-            class="z-10 w-44 font-normal shadow bg-white rounded-md py-1 absolute top-12 right-0"
-            id="dropdownStudentNavbar"
+                  (mouseleave)="closeStudentDropDown()"
+                  *ngIf="studentDropdownOpen"
+                  class="z-10 w-44 font-normal shadow bg-white rounded-md py-1 absolute top-12 right-0"
+                  id="dropdownStudentNavbar"
           >
             <ul
-              aria-labelledby="dropdownLargeButton"
-              class="py-1 text-sm text-gray-700"
+                    aria-labelledby="dropdownLargeButton"
+                    class="py-1 text-sm text-gray-700"
             >
               <li>
                 <a
-                  (click)="navigateTo('student/topic')"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Topics</a
-                >
-                <a
-                  (click)="navigateTo('student/proposal')"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Proposals</a
-                >
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li *ngIf="isAuthenticated() && isCoach()">
-          <button
-            (click)="onCoachDropDownClick()"
-            class="flex justify-between items-center py-2 pr-4 pl-3 w-full"
-            id="dropdownCoachNavbarLink"
-          >
-            Coach
-            <svg
-              aria-hidden="true"
-              class="ml-1 w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                clip-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                fill-rule="evenodd"
-              ></path>
-            </svg>
-          </button>
-          <!-- Dropdown menu -->
-          <div
-            (mouseleave)="closeCoachDropDown()"
-            *ngIf="coachDropdownOpen"
-            class="z-10 w-44 font-normal shadow bg-white rounded-md py-1 absolute top-12 right-0"
-            id="dropdownCoachNavbar"
-          >
-            <ul
-              aria-labelledby="dropdownLargeButton"
-              class="py-1 text-sm text-gray-700"
-            >
-              <li>
-                <a
-                  (click)="navigateTo('coach/topic')"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Topics</a
-                >
-                <a
-                  (click)="navigateTo('coach/proposal')"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Proposals</a
-                >
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li *ngIf="isAuthenticated() && isMentor()">
-          <button
-            (click)="onMentorDropDownClick()"
-            class="flex justify-between items-center py-2 pr-4 pl-3 w-full"
-            id="dropdownMentorNavbarLink"
-          >
-            Mentor
-            <svg
-              aria-hidden="true"
-              class="ml-1 w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                clip-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                fill-rule="evenodd"
-              ></path>
-            </svg>
-          </button>
-          <!-- Dropdown menu -->
-          <div
-            (mouseleave)="closeMentorDropDown()"
-            *ngIf="mentorDropdownOpen"
-            class="z-10 w-44 font-normal shadow bg-white rounded-md py-1 absolute top-12 right-0"
-            id="dropdownMentorNavbar"
-          >
-            <ul
-              aria-labelledby="dropdownLargeButton"
-              class="py-1 text-sm text-gray-700"
-            >
-              <li>
-                <a
-                  (click)="navigateTo('mentor/topic')"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        (click)="navigateTo('student/topic')"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >Topics</a
                 >
                 <a
-                  (click)="navigateTo('mentor/proposal')"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        (click)="navigateTo('student/proposal')"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >Proposals</a
                 >
               </li>
             </ul>
           </div>
         </li>
-        <li *ngIf="isAuthenticated() && isAdmin()">
+        <li *ngIf="isCoach()">
           <button
-            (click)="onAdminDropDownClick()"
-            class="flex justify-between items-center py-2 pr-4 pl-3 w-full"
-            id="dropdownNavbarLink"
+                  (click)="onCoachDropDownClick()"
+                  class="flex justify-between items-center py-2 pr-4 pl-3 w-full"
+                  id="dropdownCoachNavbarLink"
           >
-            Admin
+            Coach
             <svg
-              aria-hidden="true"
-              class="ml-1 w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    class="ml-1 w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                clip-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      fill-rule="evenodd"
               ></path>
             </svg>
           </button>
           <!-- Dropdown menu -->
           <div
-            (mouseleave)="closeAdminDropDown()"
-            *ngIf="adminDropdownOpen"
-            class="z-10 w-44 font-normal shadow bg-white rounded-md py-1 absolute top-12 right-0"
-            id="dropdownNavbar"
+                  (mouseleave)="closeCoachDropDown()"
+                  *ngIf="coachDropdownOpen"
+                  class="z-10 w-44 font-normal shadow bg-white rounded-md py-1 absolute top-12 right-0"
+                  id="dropdownCoachNavbar"
           >
             <ul
-              aria-labelledby="dropdownLargeButton"
-              class="py-1 text-sm text-gray-700"
+                    aria-labelledby="dropdownLargeButton"
+                    class="py-1 text-sm text-gray-700"
             >
               <li>
                 <a
-                  (click)="navigateTo('admin/topic')"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Topics</a
+                        (click)="navigateTo('coach/topic')"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >Topics</a
                 >
                 <a
-                  (click)="navigateTo('admin/proposal')"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Proposals</a
+                        (click)="navigateTo('coach/proposal')"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >Proposals</a
                 >
               </li>
             </ul>
           </div>
         </li>
-        <li *ngIf=isAuthenticated()>
+        <li *ngIf="isMentor()">
+          <button
+                  (click)="onMentorDropDownClick()"
+                  class="flex justify-between items-center py-2 pr-4 pl-3 w-full"
+                  id="dropdownMentorNavbarLink"
+          >
+            Mentor
+            <svg
+                    aria-hidden="true"
+                    class="ml-1 w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                      clip-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      fill-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <!-- Dropdown menu -->
+          <div
+                  (mouseleave)="closeMentorDropDown()"
+                  *ngIf="mentorDropdownOpen"
+                  class="z-10 w-44 font-normal shadow bg-white rounded-md py-1 absolute top-12 right-0"
+                  id="dropdownMentorNavbar"
+          >
+            <ul
+                    aria-labelledby="dropdownLargeButton"
+                    class="py-1 text-sm text-gray-700"
+            >
+              <li>
+                <a
+                        (click)="navigateTo('mentor/topic')"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >Topics</a
+                >
+                <a
+                        (click)="navigateTo('mentor/proposal')"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >Proposals</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li *ngIf="isAdmin()">
+          <button
+                  (click)="onAdminDropDownClick()"
+                  class="flex justify-between items-center py-2 pr-4 pl-3 w-full"
+                  id="dropdownNavbarLink"
+          >
+            Admin
+            <svg
+                    aria-hidden="true"
+                    class="ml-1 w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                      clip-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      fill-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <!-- Dropdown menu -->
+          <div
+                  (mouseleave)="closeAdminDropDown()"
+                  *ngIf="adminDropdownOpen"
+                  class="z-10 w-44 font-normal shadow bg-white rounded-md py-1 absolute top-12 right-0"
+                  id="dropdownNavbar"
+          >
+            <ul
+                    aria-labelledby="dropdownLargeButton"
+                    class="py-1 text-sm text-gray-700"
+            >
+              <li>
+                <a
+                        (click)="navigateTo('admin/topic')"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >Topics</a
+                >
+                <a
+                        (click)="navigateTo('admin/proposal')"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >Proposals</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li *ngIf="user$ | async as user">
+          <div class="flex items-center">
+            <img [src]="user.picture" [title]="user.email" class="w-10 h-10 rounded-full" alt="User Image">
+          </div>
+        </li>
+        <li>
           <app-logout-button></app-logout-button>
         </li>
+        </ng-container>
+        <ng-container *ngIf="!isAuthenticated()">
+        <li>
+          <app-login-button ></app-login-button>
+        </li>
+        <li>
+          <app-signup-button></app-signup-button>
+        </li>
+        </ng-container>
       </ul>
     </div>
   </div>

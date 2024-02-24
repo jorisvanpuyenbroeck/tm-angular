@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopicFormComponent } from './topic-form.component';
+import { AdminTopicFormComponent } from './topic-form.component';
 
-describe('TopicFormComponent', () => {
-  let component: TopicFormComponent;
-  let fixture: ComponentFixture<TopicFormComponent>;
+describe('AdminTopicFormComponent', () => {
+  let component: AdminTopicFormComponent;
+  let fixture: ComponentFixture<AdminTopicFormComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TopicFormComponent]
+      declarations: [AdminTopicFormComponent]
     });
-    fixture = TestBed.createComponent(TopicFormComponent);
+    fixture = TestBed.createComponent(AdminTopicFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
