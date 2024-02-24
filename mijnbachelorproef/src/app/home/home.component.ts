@@ -1,7 +1,8 @@
 import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
-import {SharedModule} from "../shared/shared.module";
 import { AuthService } from '@auth0/auth0-angular';
 import { UserStore} from "../store/user-store";
+import {first} from "rxjs";
+import {UserService} from "../security/user.service";
 
 @Component({
   selector: 'app-home',
@@ -10,16 +11,19 @@ import { UserStore} from "../store/user-store";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-
-  //Signals https://angular.dev/guide/signals
-  isAuthenticated = signal(false);
   user$;
 
-
-  constructor(private authService: AuthService, private userStore: UserStore){
-    this.authService.isAuthenticated$.subscribe((auth) => {
-      this.isAuthenticated.set(auth);
-    });
+  constructor(private userStore: UserStore, private userService: UserService) {
     this.user$ = this.userStore.state$;
+    this.user$.subscribe(user => {
+      if (user && user.sub) {
+        this.userService.userExists(user.sub).subscribe(exists => {
+          console.log('user exists:', exists)
+          if (!exists) {
+            this.userService.createUser(user).subscribe();
+          }
+        });
+      }
+    });
   }
 }

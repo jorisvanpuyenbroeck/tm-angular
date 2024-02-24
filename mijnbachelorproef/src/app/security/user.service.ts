@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserStore } from '../store/user-store';
-import { map } from 'rxjs/operators';
-import {Observable} from "rxjs";
+import { map, tap } from 'rxjs/operators';
+import {Observable, BehaviorSubject, first, take} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
 
@@ -10,15 +10,19 @@ import {User} from "../models/user";
     providedIn: 'root'
 })
 export class UserService {
+
+    userStore$: Observable<User> ;
+
     constructor(public auth: AuthService, private userStore: UserStore, private http: HttpClient) {
-        // console.log('UserService is called');
         this.updateUserState();
+        this.userStore$ = this.userStore.select(state => state);
     }
 
     updateUserState(): void {
+        console.log('trying to update user state')
         this.auth.user$.pipe(
+            take(1),
             map(user => {
-                console.log('user', user);
                 if (user && user.sub) {
                     // Update the user state
                     this.userStore.setUser({
@@ -33,9 +37,10 @@ export class UserService {
                         // map other properties...
                     });
                 }
-            })
+            }),
         ).subscribe();
     }
+
 
     userExists(sub: string): Observable<boolean> {
         console.log('trying to check if user exists:', sub)
