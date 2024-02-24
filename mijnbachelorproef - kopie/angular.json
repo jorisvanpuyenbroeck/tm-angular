@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mijnbachelorproef:build:production"
+              "browserTarget": "mijnbachelorproef:build:production"
             },
             "development": {
-              "buildTarget": "mijnbachelorproef:build:development"
+              "browserTarget": "mijnbachelorproef:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "mijnbachelorproef:build"
+            "browserTarget": "mijnbachelorproef:build"
           }
         },
         "test": {
