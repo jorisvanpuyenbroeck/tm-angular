@@ -12,7 +12,6 @@ import {User} from "../../models/user";
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent implements OnInit {
   hamburgerOpen = false;
