@@ -1,6 +1,7 @@
 import { ComponentStore } from '@ngrx/component-store';
 import { User } from '../models/user';
 import {Injectable} from "@angular/core";
+import {Application} from "../models/application";
 
 
 @Injectable()
@@ -15,6 +16,15 @@ export class UserStore extends ComponentStore<User> {
       nickname: "",
       password: "",
       picture: "",
+      application: {
+        topics: [],
+        organisations: [],
+        proposals: [],
+        project: null,
+        topicsSaved: false,
+        organisationsSaved: false,
+        proposalsSaved: false,
+        projectSaved: false, } as Application,
       programType: "",
       studentProjects: null,
       token: "",
@@ -31,4 +41,6 @@ export class UserStore extends ComponentStore<User> {
   // Define a setter method for updating the user state
   readonly setUser = this.updater((state, user: User) => {
     return user;
-  });}
+  });
+
+}

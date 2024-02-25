@@ -1,3 +1,5 @@
+import {Application} from "./application";
+
 export interface User {
   sub?: string;
   userId?: number;
@@ -9,6 +11,7 @@ export interface User {
   password?: string;
   email?: string;
   emailVerified?: boolean;
+  application?: Application;
   programType?: string;
   userLevel?: string;
   expertise?: string;
