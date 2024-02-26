@@ -11,7 +11,7 @@ export interface User {
   password?: string;
   email?: string;
   emailVerified?: boolean;
-  application?: Application;
+  application: Application;
   programType?: string;
   userLevel?: string;
   expertise?: string;

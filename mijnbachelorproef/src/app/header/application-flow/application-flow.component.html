@@ -1,7 +1,7 @@
 <div class="max-w-xxl mx-auto my-4 border-b-1">
     <div class="flex text-xs content-center text-center">
-        <app-application-stage class="w-1/4" [name]="'topics'" [number]="1" [completed]="false"></app-application-stage>
-        <app-application-stage class="w-1/4" [name]="'organisations'" [number]="2" [completed]="false"></app-application-stage>
+        <app-application-stage class="w-1/4" [name]="'topics'" [number]="1" [completed]="user.application.topicsSaved"></app-application-stage>
+        <app-application-stage class="w-1/4" [name]="'organisations'" [number]="2" [completed]="user.application.organisationsSaved"></app-application-stage>
         <app-application-stage class="w-1/4" [name]="'proposals'" [number]="3" [completed]="false"></app-application-stage>
         <app-application-stage class="w-1/4" [name]="'your project'" [number]="4" [completed]="false"></app-application-stage>
     </div>

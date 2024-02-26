@@ -32,12 +32,16 @@
         </p>
       </mat-card-content>
       <mat-card-actions class="flex justify-end">
-        <button mat-button>
-          <i class="fas fa-star icon"></i>
+        <button (click)="toggleFavourite(organisation.organisationId)">
+          <mat-icon *ngIf="isFavourite(organisation.organisationId); else notFav" class="text-yellow-400">star</mat-icon>
+          <ng-template #notFav><mat-icon class="text-gray-400">star_border</mat-icon></ng-template>
         </button>
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
+<button [ngStyle]="{'background-color': hasApplicationOrganisations ? '#68d391' : 'gray'}" mat-fab (click)="saveOrganisations()" style="position: fixed; bottom: 20px; right: 20px;">
+  <mat-icon>arrow_forward</mat-icon>
+</button>
 
 

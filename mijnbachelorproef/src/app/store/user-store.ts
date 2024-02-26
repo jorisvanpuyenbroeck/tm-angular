@@ -20,7 +20,7 @@ export class UserStore extends ComponentStore<User> {
         topics: [],
         organisations: [],
         proposals: [],
-        project: null,
+        project: 0,
         topicsSaved: false,
         organisationsSaved: false,
         proposalsSaved: false,
@@ -40,7 +40,12 @@ export class UserStore extends ComponentStore<User> {
 
   // Define a setter method for updating the user state
   readonly setUser = this.updater((state, user: User) => {
-    return user;
+    return {...state, ...user};
   });
+
+  readonly selectTopics = this.select(
+      state => state.application.topics
+  );
+
 
 }

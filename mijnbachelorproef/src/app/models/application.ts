@@ -4,12 +4,12 @@ import {Proposal} from "./proposal";
 import {Project} from "./project";
 
 export interface Application {
-  topics: Topic[];
+  topics: number[];
   topicsSaved: boolean;
-  organisations: Organisation[];
+  organisations: number[];
   organisationsSaved: boolean;
-  proposals: Proposal[];
+  proposals: number[];
   proposalsSaved: boolean;
-  project: Project | null;
+  project: number;
   projectSaved: boolean;
 }

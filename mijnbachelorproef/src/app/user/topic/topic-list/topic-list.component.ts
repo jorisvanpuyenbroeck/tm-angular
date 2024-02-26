@@ -4,90 +4,78 @@ import { TopicService } from '../topic.service';
 import { Subscription } from 'rxjs';
 import {Application} from "../../../models/application";
 import {UserStore} from "../../../store/user-store";
+import {User} from "../../../models/user";
+import {UserService} from "../../../security/user.service";
 
 @Component({
   selector: 'app-topic-list',
   templateUrl: './topic-list.component.html',
   styleUrls: ['./topic-list.component.css'],
 })
-export class UserTopicListComponent implements OnInit, OnDestroy {
+export class UserTopicListComponent implements OnInit {
+
+  // local
   topics: Topic[] = [];
-  topics$: Subscription = new Subscription();
-  user$;
-  user: any; // Add a user property
-  userSubscription: Subscription = new Subscription();
+  user: User = {} as User;
   hasApplicationTopics: boolean = false;
 
-  constructor(private topicService: TopicService, private userStore: UserStore) {
-    this.user$ = this.userStore.state$;
-  }
+  // Subscriptions
+  topicsSubscription: Subscription = new Subscription();
+  userSubscription: Subscription = new Subscription();
+
+  constructor(
+    public topicService: TopicService,
+    public userService: UserService)
+  {}
 
   ngOnInit(): void {
     this.getTopics();
-    this.userSubscription = this.user$.subscribe(user => {
+    this.userSubscription = this.userService.userStore$.subscribe(user => {
+      console.log("topic list component initialized");
       // Update the local user property
       this.user = user;
-      // If the user doesn't have an application property, initialize it
-      if (!user.application) {
-        user.application = {
-          topics: [],
-          organisations: [],
-          proposals: [],
-          project: null,
-          topicsSaved: false,
-          organisationsSaved: false,
-          proposalsSaved: false,
-          projectSaved: false
-        } as Application;
-      }
+      console.log(user.application.topics);
       // does the next arrow need to be green?
-      this.hasApplicationTopics = user && user.application && user.application.topics && user.application.topics.length > 0 || false;
-
+      this.hasApplicationTopics = user.application.topics.length > 0;
     });
   }
 
   ngOnDestroy(): void {
-    this.topics$.unsubscribe();
+    this.topicsSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
   }
 
   getTopics() {
-    this.topics$ = this.topicService
+    this.topicsSubscription = this.topicService
         .getTopics()
         .subscribe((result) => (this.topics = result));
   }
 
-  toggleFavourite(topic: Topic) {
-    if (this.user && this.user.application) {
-      console.log('user', this.user);
+  toggleFavourite(topicId: number) {
+
       // If application is defined
-      if (this.isFavourite(topic)) {
+      if (this.isFavourite(topicId)) {
         // If the topic is already in the topics array, remove it
-        const index = this.user.application.topics.indexOf(topic);
+        const index = this.user.application.topics.indexOf(topicId);
         this.user.application.topics.splice(index, 1);
       } else {
         // If the topic is not in the topics array, add it
-        this.user.application.topics.push(topic);
+        this.user.application.topics.push(topicId);
       }
-      // Update the user in the UserStore
-      this.userStore.setUser(this.user);
 
       // Update hasApplicationTopics
-      this.hasApplicationTopics = this.user && this.user.application && this.user.application.topics && this.user.application.topics.length > 0 || false;
+      this.hasApplicationTopics = this.user.application.topics.length > 0;
 
-    } else {
-      // Handle the case where application is undefined
-      console.error('Application is undefined');
-    }
   }
 
-  isFavourite(topic: Topic): boolean {
-    return this.user && this.user.application && this.user.application.topics.includes(topic) || false;
+  isFavourite(topicId: number): boolean {
+    return this.user.application.topics ? this.user.application.topics.includes(topicId) : false;
   }
 
   saveTopics() {
     if (this.hasApplicationTopics) {
-      console.log('saveTopics');
+      this.user.application.topicsSaved = true;
+      console.log("saved", this.user || "user triggered");
       // this.user$.subscribe(user => {
       //   this.topicService.saveTopics(user.application.topics);
     }

@@ -2,7 +2,7 @@
   class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 justify-between"
 >
   <div *ngFor="let topic of topics">
-    <mat-card [ngStyle]="{'background-color': isFavourite(topic) ? 'lightyellow' : ''}">
+    <mat-card>
       <mat-card-header class="flex flex-col">
         <mat-card-title class="my-2 rounded border-b-2 border-dotted">
           {{ topic.name }}
@@ -14,16 +14,15 @@
         </p>
       </mat-card-content>
       <mat-card-actions class="flex justify-end">
-        <button (click)="toggleFavourite(topic)">
-          <mat-icon *ngIf="isFavourite(topic); else notFav" class="text-yellow-400">star</mat-icon>
+        <button (click)="toggleFavourite(topic.topicId)">
+          <mat-icon *ngIf="isFavourite(topic.topicId); else notFav" class="text-yellow-400">star</mat-icon>
           <ng-template #notFav><mat-icon class="text-gray-400">star_border</mat-icon></ng-template>
         </button>
       </mat-card-actions>
       </mat-card>
   </div>
 </div>
-<!-- app.component.html -->
-<button [ngStyle]="{'background-color': hasApplicationTopics ? 'green' : 'gray'}" mat-fab (click)="saveTopics()" style="position: fixed; bottom: 20px; right: 20px;">
+<button [ngStyle]="{'background-color': hasApplicationTopics ? '#68d391' : 'gray'}" mat-fab (click)="saveTopics()" style="position: fixed; bottom: 20px; right: 20px;">
   <mat-icon>arrow_forward</mat-icon>
 </button>
 

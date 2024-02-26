@@ -5,13 +5,14 @@ import { map, tap } from 'rxjs/operators';
 import {Observable, BehaviorSubject, first, take} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
+import {Application} from "../models/application";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    userStore$: Observable<User> ;
+    public userStore$: Observable<User> ;
 
     constructor(public auth: AuthService, private userStore: UserStore, private http: HttpClient) {
         this.updateUserState();
@@ -34,6 +35,16 @@ export class UserService {
                         familyName: user.family_name,
                         nickname: user.nickname,
                         emailVerified: user.email_verified,
+                        application: {
+                            topics: [],
+                            organisations: [],
+                            proposals: [],
+                            project: 0,
+                            topicsSaved: false,
+                            organisationsSaved: false,
+                            proposalsSaved: false,
+                            projectSaved: false,
+                        } as Application,
                         // map other properties...
                     });
                 }
@@ -52,6 +63,8 @@ export class UserService {
         return this.http.post('https://localhost:7026/api/Users/', user);
     }
 
-
+    setUser(user: User) {
+        this.userStore.setUser(user);
+    }
 
 }

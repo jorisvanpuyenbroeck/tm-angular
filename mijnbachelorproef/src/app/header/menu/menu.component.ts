@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, signal, OnInit, OnDestroy} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { RoleService } from '../../security/role.service';
 import { UserStore } from '../../store/user-store';
-import { Observable } from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {User} from "../../models/user";
+import {UserService} from "../../security/user.service";
 
 
 
@@ -13,7 +14,7 @@ import {User} from "../../models/user";
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
   hamburgerOpen = false;
   adminDropdownOpen = false;
   coachDropdownOpen = false;
@@ -27,18 +28,23 @@ export class MenuComponent implements OnInit {
   isStudent = signal(false);
   isMentor = signal(false);
 
-  // Observables
-  user$: Observable<User>;
+  // local
+  user: User = {} as User;
+
+  // Subscription
+  userSubscription: Subscription = new Subscription();
 
   constructor(
     public authService: AuthService,
     public roleService: RoleService,
-    private userStore: UserStore,
+    public userService: UserService,
     private router: Router,
-  ) {
+  ) { }
 
-    this.user$ = this.userStore.select(state => state);
-
+  ngOnInit(): void {
+    this.userSubscription = this.userService.userStore$.subscribe(user => {
+      this.user = user;
+    });
     this.authService.isAuthenticated$.subscribe((auth) => {
       this.isAuthenticated.set(auth);
     });
@@ -54,11 +60,11 @@ export class MenuComponent implements OnInit {
     this.roleService.hasPermission('isMentor').subscribe((mentor) => {
       this.isMentor.set(mentor);
     });
+
   }
 
-  ngOnInit(): void {
-    this.user$ = this.userStore.select(state => state);
-
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 
   toggleHamburger(): void {
@@ -108,4 +114,5 @@ export class MenuComponent implements OnInit {
     this.hamburgerOpen = false;
     this.router.navigate([path]);
   }
+
 }
