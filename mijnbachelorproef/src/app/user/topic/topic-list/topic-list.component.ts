@@ -2,8 +2,6 @@ import {Component, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import { Topic } from '../../../models/topic';
 import { TopicService } from '../topic.service';
 import { Subscription } from 'rxjs';
-import {Application} from "../../../models/application";
-import {UserStore} from "../../../store/user-store";
 import {User} from "../../../models/user";
 import {UserService} from "../../../security/user.service";
 
@@ -15,9 +13,9 @@ import {UserService} from "../../../security/user.service";
 export class UserTopicListComponent implements OnInit {
 
   // local
-  topics: Topic[] = [];
-  user: User = {} as User;
-  hasApplicationTopics: boolean = false;
+  public topics: Topic[] = [];
+  public user: User = {} as User;
+
 
   // Subscriptions
   topicsSubscription: Subscription = new Subscription();
@@ -25,8 +23,7 @@ export class UserTopicListComponent implements OnInit {
 
   constructor(
     public topicService: TopicService,
-    public userService: UserService)
-  {}
+    public userService: UserService) {}
 
   ngOnInit(): void {
     this.getTopics();
@@ -34,10 +31,8 @@ export class UserTopicListComponent implements OnInit {
       console.log("topic list component initialized");
       // Update the local user property
       this.user = user;
-      console.log(user.application.topics);
-      // does the next arrow need to be green?
-      this.hasApplicationTopics = user.application.topics.length > 0;
     });
+
   }
 
   ngOnDestroy(): void {
@@ -63,9 +58,6 @@ export class UserTopicListComponent implements OnInit {
         this.user.application.topics.push(topicId);
       }
 
-      // Update hasApplicationTopics
-      this.hasApplicationTopics = this.user.application.topics.length > 0;
-
   }
 
   isFavourite(topicId: number): boolean {
@@ -73,7 +65,7 @@ export class UserTopicListComponent implements OnInit {
   }
 
   saveTopics() {
-    if (this.hasApplicationTopics) {
+    if (this.userService.checkApplicationProgress(this.user, "topics")) {
       this.user.application.topicsSaved = true;
       console.log("saved", this.user || "user triggered");
       // this.user$.subscribe(user => {

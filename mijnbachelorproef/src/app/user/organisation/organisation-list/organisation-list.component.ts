@@ -16,8 +16,6 @@ export class UserOrganisationListComponent implements OnInit {
   // color: String = 'primary';
   organisations: Organisation[] = [];
   user: User = {} as User;
-  hasApplicationOrganisations: boolean = false;
-
 
   // Subscriptions
   organisationSubscription: Subscription = new Subscription();
@@ -35,8 +33,6 @@ export class UserOrganisationListComponent implements OnInit {
       console.log("organisation component initialized");
       // Update the local user property
       this.user = user;
-      // does the next arrow need to be green?
-      // this.hasApplicationOrganisations = user.application.organisations.length > 0;
     });
   }
 
@@ -51,10 +47,6 @@ export class UserOrganisationListComponent implements OnInit {
       .subscribe((result) => (this.organisations = result));
   }
 
-  openOrganisation(organisation: Organisation) {
-    console.log('get organisation');
-  }
-
   toggleFavourite(organisationId: number) {
 
     // If application is defined
@@ -66,10 +58,6 @@ export class UserOrganisationListComponent implements OnInit {
       // If the topic is not in the topics array, add it
       this.user.application.organisations.push(organisationId);
     }
-
-    // Update hasApplicationTopics
-    this.hasApplicationOrganisations = this.user.application.organisations.length > 0;
-
   }
 
   isFavourite(organisationId: number): boolean {
@@ -78,7 +66,7 @@ export class UserOrganisationListComponent implements OnInit {
 
 
   saveOrganisations() {
-    if (this.hasApplicationOrganisations) {
+    if (this.userService.checkApplicationProgress(this.user, "organisations")) {
       this.user.application.organisationsSaved = true;
       console.log("saved", this.user || "user triggered");
       // this.user$.subscribe(user => {

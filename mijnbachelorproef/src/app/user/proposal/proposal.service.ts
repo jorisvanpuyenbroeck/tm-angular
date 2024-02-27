@@ -14,4 +14,10 @@ export class ProposalService {
       'https://localhost:7026/api/proposals',
     );
   }
+
+  getProposalsByTopics(topicIds: number[]): Observable<Proposal[]> {
+    const queryString = topicIds.map(id => `topicIds=${id}`).join('&');
+    const apiUrl = `https://localhost:7026/api/proposals/by-topic?${queryString}`;
+    return this.httpClient.get<Proposal[]>(apiUrl);
+  }
 }

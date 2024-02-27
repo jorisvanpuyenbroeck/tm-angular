@@ -40,8 +40,8 @@
     </mat-card>
   </div>
 </div>
-<button [ngStyle]="{'background-color': hasApplicationOrganisations ? '#68d391' : 'gray'}" mat-fab (click)="saveOrganisations()" style="position: fixed; bottom: 20px; right: 20px;">
-  <mat-icon>arrow_forward</mat-icon>
+<button [ngStyle]="{'background-color': userService.checkApplicationProgress(user, 'organisations') ? '#68d391' : 'gray'}" mat-fab (click)="saveOrganisations()" style="position: fixed; bottom: 20px; right: 20px;">
+  <mat-icon>save</mat-icon>
 </button>
 
 

@@ -13,10 +13,15 @@ import {Application} from "../models/application";
 export class UserService {
 
     public userStore$: Observable<User> ;
+    hasApplicationTopics: boolean = false;
+    hasApplicationOrganisations: boolean = false;
+    hasApplicationProposals: boolean = false;
+    hasApplicationProject: boolean = false;
 
     constructor(public auth: AuthService, private userStore: UserStore, private http: HttpClient) {
         this.updateUserState();
         this.userStore$ = this.userStore.select(state => state);
+
     }
 
     updateUserState(): void {
@@ -66,5 +71,27 @@ export class UserService {
     setUser(user: User) {
         this.userStore.setUser(user);
     }
+
+    checkApplicationProgress(user: User, phase: string) {
+        this.hasApplicationTopics = user.application.topics.length > 0;
+        this.hasApplicationOrganisations = user.application.organisations.length > 0;
+        this.hasApplicationProposals = user.application.proposals.length > 0;
+        this.hasApplicationProject = user.application.project > 0;
+
+        switch (phase) {
+            case 'topics':
+                return this.hasApplicationTopics;
+            case 'organisations':
+                return this.hasApplicationOrganisations;
+            case 'proposals':
+                return this.hasApplicationProposals;
+            case 'project':
+                return this.hasApplicationProject;
+            default:
+                return false;
+        }
+    }
+
+
 
 }
