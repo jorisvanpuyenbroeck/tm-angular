@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, HostListener, signal, ElementRef} from '@angular/core';
 import {AuthService} from "@auth0/auth0-angular";
 import {RoleService} from "./security/role.service";
 import {Router} from "@angular/router";
@@ -25,6 +25,14 @@ export class AppComponent {
       this.isStudent.set(student);
     });
 
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e: Event) {
+    let element = document.getElementById('hero');
+    if (element && window.pageYOffset > 0) {
+      element.classList.add('hide');
+    }
   }
 
 

@@ -7,6 +7,8 @@ export interface Project {
   projectId: number;
   createdAt: Date;
   updatedAt: Date;
+  title: string;
+  description: string;
   stage: string;
   active: boolean;
   supported: boolean;

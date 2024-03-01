@@ -10,10 +10,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatCardModule } from "@angular/material/card";
 import { StoreModule } from "../store/store.module";
+import {ProjectRequirementsComponent} from "./modals/project-requirements/project-requirements.component";
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ProjectRequirementsComponent],
   imports: [
     StoreModule,
     CommonModule,
@@ -38,7 +39,8 @@ import { StoreModule } from "../store/store.module";
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    ProjectRequirementsComponent
   ],
 })
 export class SharedModule {}

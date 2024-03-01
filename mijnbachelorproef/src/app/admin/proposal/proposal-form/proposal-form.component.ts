@@ -97,4 +97,5 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
   goBack() {
     this.location.back();
   }
+
 }
