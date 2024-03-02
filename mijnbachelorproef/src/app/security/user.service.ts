@@ -17,6 +17,8 @@ export class UserService {
     hasApplicationOrganisations: boolean = false;
     hasApplicationProposals: boolean = false;
     hasApplicationProject: boolean = false;
+    hasApplicationOneOrganisation: boolean = false;
+    hasApplicationOneProposal: boolean = false;
     canProposeProject: boolean = false;
 
     constructor(public auth: AuthService, private userStore: UserStore, private http: HttpClient) {
@@ -78,7 +80,11 @@ export class UserService {
         this.hasApplicationOrganisations = user.application.organisations.length > 0;
         this.hasApplicationProposals = user.application.proposals.length > 0;
         this.hasApplicationProject = user.application.project > 0 ;
-        this.canProposeProject = this.hasApplicationTopics && this.hasApplicationOrganisations && user.application.proposals.length === 1;
+        this.hasApplicationOneOrganisation = user.application.organisations.length === 1;
+        this.hasApplicationOneProposal = user.application.proposals.length === 1;
+
+        this.canProposeProject = this.hasApplicationTopics && this.hasApplicationOneOrganisation  && this.hasApplicationOneProposal;
+        console.log('canProposeProject:', this.canProposeProject);
 
         switch (phase) {
             case 'topics':

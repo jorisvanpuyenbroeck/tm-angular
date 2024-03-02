@@ -10,6 +10,8 @@ import {Proposal} from "../../../models/proposal";
 import {Organisation} from "../../../models/organisation";
 import {User} from "../../../models/user";
 import {UserService} from "../../../security/user.service";
+import {ProposalService} from "../../proposal/proposal.service";
+import {OrganisationService} from "../../organisation/organisation.service";
 
 @Component({
   selector: 'app-project-form',
@@ -17,12 +19,17 @@ import {UserService} from "../../../security/user.service";
   styleUrls: ['./project-form.component.css'],
 })
 export class UserProjectFormComponent implements OnInit, OnDestroy {
+
+  //locals
   isAdd: boolean = false;
   isEdit: boolean = false;
+  user: User = {} as User;
   projectId: number = 0;
   origins: string[] = ['student', 'docent', 'werkveld'];
   allTopics: Topic[] = [];
+  topic: Topic = {} as Topic;
   canProposeProject: boolean = false;
+
 
   project: Project = {
     projectId: 0,
@@ -51,17 +58,25 @@ export class UserProjectFormComponent implements OnInit, OnDestroy {
   isSubmitted: boolean = false;
   errorMessage: string = '';
 
-  project$: Subscription = new Subscription();
-  postProject$: Subscription = new Subscription();
-  putProject$: Subscription = new Subscription();
-  allTopics$: Subscription = new Subscription();
+  // Subscriptions
+
+  projectSubscription: Subscription = new Subscription();
+  postProjectSubscription: Subscription = new Subscription();
+  putProjectSubscription: Subscription = new Subscription();
+  allTopicsSubscription: Subscription = new Subscription();
+  userSubscription: Subscription = new Subscription();
+  topicSubscription: Subscription = new Subscription();
+  proposalSubscription: Subscription = new Subscription();
+  organisationSubscription: Subscription = new Subscription();
 
   constructor(
       private router: Router,
       private projectService: ProjectService,
       private topicService: TopicService,
       private location: Location,
-      public  userService: UserService
+      private userService: UserService,
+      private proposalService: ProposalService,
+      private organisationService: OrganisationService
   ) {}
 
   ngOnInit(): void {
@@ -70,20 +85,32 @@ export class UserProjectFormComponent implements OnInit, OnDestroy {
     this.isEdit =
         this.router.getCurrentNavigation()?.extras.state?.['mode'] === 'edit';
     this.projectId = +this.router.getCurrentNavigation()?.extras.state?.['id'];
+    this.userSubscription = this.userService.userStore$.subscribe(user => {
+      this.project.student = user;
+    });
+    this.proposalSubscription = this.proposalService.getProposalById(this.project.student.application.proposals[0]).subscribe((result) => {
+        this.project.proposal = result;
+    });
+    this.organisationSubscription = this.organisationService.getOrganisationById(this.project.student.application.organisations[0]).subscribe((result) => {
+        this.project.organisation = result;
+    });
+    this.project.student.application.topics.forEach((topicId) => {
+      this.topicSubscription = this.topicService.getTopicById(topicId).subscribe((result) => {
+        this.project.topics = [...this.project.topics, result];
+      });
+    });
 
     if (!this.isAdd && !this.isEdit) {
       this.isAdd = true;
     }
 
     if (this.projectId != null && this.projectId > 0) {
-      this.project$ = this.projectService
+      this.projectSubscription = this.projectService
           .getProjectById(this.projectId)
           .subscribe((result) => (this.project = result));
-
-      // console.log(this.project);
     }
 
-    this.allTopics$ = this.topicService.getTopics().subscribe((result) => {
+    this.allTopicsSubscription = this.topicService.getTopics().subscribe((result) => {
       this.allTopics = result.map((t) => t);
     });
 
@@ -91,15 +118,15 @@ export class UserProjectFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.project$.unsubscribe();
-    this.postProject$.unsubscribe();
-    this.putProject$.unsubscribe();
+    this.projectSubscription.unsubscribe();
+    this.postProjectSubscription.unsubscribe();
+    this.putProjectSubscription.unsubscribe();
   }
 
   onSubmit() {
     this.isSubmitted = true;
     if (this.isAdd) {
-      this.postProject$ = this.projectService
+      this.postProjectSubscription = this.projectService
           .postProject(this.project)
           .subscribe({
             next: (v) => this.router.navigateByUrl('/admin/project'),
@@ -108,7 +135,7 @@ export class UserProjectFormComponent implements OnInit, OnDestroy {
     }
     if (this.isEdit) {
       // console.log(this.project);
-      this.putProject$ = this.projectService
+      this.putProjectSubscription = this.projectService
           .putProject(this.project)
           .subscribe({
             next: (v) => this.router.navigateByUrl('/admin/project'),

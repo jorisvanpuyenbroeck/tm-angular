@@ -14,4 +14,11 @@ export class OrganisationService {
       'https://localhost:7026/api/organisations',
     );
   }
+
+    getOrganisationById(organisationId: number): Observable<Organisation> {
+        return this.httpClient.get<Organisation>(
+        `https://localhost:7026/api/organisations/${organisationId}`,
+        );
+    }
+
 }
