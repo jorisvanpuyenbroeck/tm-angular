@@ -12,6 +12,9 @@ import {User} from "../../../models/user";
 import {UserService} from "../../../security/user.service";
 import {ProposalService} from "../../proposal/proposal.service";
 import {OrganisationService} from "../../organisation/organisation.service";
+import { map } from 'rxjs/operators';
+import {ProjectDto} from "../../../models/dto/project.dto";
+
 
 @Component({
   selector: 'app-project-form',
@@ -88,11 +91,17 @@ export class UserProjectFormComponent implements OnInit, OnDestroy {
     this.userSubscription = this.userService.userStore$.subscribe(user => {
       this.project.student = user;
     });
-    this.proposalSubscription = this.proposalService.getProposalById(this.project.student.application.proposals[0]).subscribe((result) => {
-        this.project.proposal = result;
+    // this.proposalSubscription = this.proposalService.getProposalById(this.project.student.application.proposals[0]).subscribe((result) => {
+    //     this.project.proposal = result;
+    // });
+    // this.organisationSubscription = this.organisationService.getOrganisationById(this.project.student.application.organisations[0]).subscribe((result) => {
+    //     this.project.organisation = result;
+    // });
+    this.proposalSubscription = this.proposalService.getProposalById(1).subscribe((result) => {
+      this.project.proposal = result;
     });
-    this.organisationSubscription = this.organisationService.getOrganisationById(this.project.student.application.organisations[0]).subscribe((result) => {
-        this.project.organisation = result;
+    this.organisationSubscription = this.organisationService.getOrganisationById(1).subscribe((result) => {
+      this.project.organisation = result;
     });
     this.project.student.application.topics.forEach((topicId) => {
       this.topicSubscription = this.topicService.getTopicById(topicId).subscribe((result) => {
@@ -124,25 +133,46 @@ export class UserProjectFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+      const projectDto: ProjectDto = {
+      createdAt: this.project.createdAt,
+      updatedAt: this.project.updatedAt,
+      title: this.project.title,
+      description: this.project.description,
+      studentId: 9,
+      organisationId: this.project.student.application.organisations[0],
+      proposalId: this.project.student.application.proposals[0],
+      topics: this.project.topics
+    };
+
+
     this.isSubmitted = true;
     if (this.isAdd) {
       this.postProjectSubscription = this.projectService
-          .postProject(this.project)
+          .postProject(projectDto)
           .subscribe({
-            next: (v) => this.router.navigateByUrl('/admin/project'),
+            next: (response: any) => {
+              this.router.navigateByUrl('/');
+              this.project.student.application.projectSaved = true;
+              this.project.student.application.project = response.projectId
+            },
             error: (e) => (this.errorMessage = e.message),
           });
     }
     if (this.isEdit) {
       // console.log(this.project);
       this.putProjectSubscription = this.projectService
-          .putProject(this.project)
+          .putProject(projectDto)
           .subscribe({
-            next: (v) => this.router.navigateByUrl('/admin/project'),
+            next: (response: any) => {
+              this.router.navigateByUrl('/');
+              this.project.student.application.projectSaved = true;
+              this.project.student.application.project = response.projectId
+              },
             error: (e) => (this.errorMessage = e.message),
           });
       //console.log(this.project);
     }
+
   }
 
   goBack() {

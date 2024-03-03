@@ -6,6 +6,7 @@ import {Observable, BehaviorSubject, first, take} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
 import {Application} from "../models/application";
+import {UserDto} from "../models/dto/user.dto";
 
 @Injectable({
     providedIn: 'root'
@@ -67,8 +68,9 @@ export class UserService {
     }
 
     createUser(user: User): Observable<any> {
-        console.log('trying to post user:', user);
-        return this.http.post('https://localhost:7026/api/Users/', user);
+        const userDto = this.mapUserToUserDto(user);
+        console.log('trying to post user:', userDto);
+        return this.http.post('https://localhost:7026/api/Users/', userDto);
     }
 
     setUser(user: User) {
@@ -84,7 +86,6 @@ export class UserService {
         this.hasApplicationOneProposal = user.application.proposals.length === 1;
 
         this.canProposeProject = this.hasApplicationTopics && this.hasApplicationOneOrganisation  && this.hasApplicationOneProposal;
-        console.log('canProposeProject:', this.canProposeProject);
 
         switch (phase) {
             case 'topics':
@@ -102,6 +103,10 @@ export class UserService {
         }
     }
 
+    mapUserToUserDto(user: User): UserDto {
+        const { application, ...userDto } = user;
+        return userDto;
+    }
 
 
 }

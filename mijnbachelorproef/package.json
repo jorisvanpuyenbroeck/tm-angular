@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "clean": "rm -rf dist",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "compodoc": "npx compodoc -p tsconfig.doc.json"
