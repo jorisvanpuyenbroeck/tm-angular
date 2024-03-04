@@ -30,10 +30,10 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
   isSubmitted: boolean = false;
   errorMessage: string = '';
 
-  proposal$: Subscription = new Subscription();
-  postProposal$: Subscription = new Subscription();
-  putProposal$: Subscription = new Subscription();
-  allTopics$: Subscription = new Subscription();
+  proposalSubscription: Subscription = new Subscription();
+  postProposalSubscription: Subscription = new Subscription();
+  putProposalSubscription: Subscription = new Subscription();
+  allTopicsSubscription: Subscription = new Subscription();
 
   constructor(
     private router: Router,
@@ -52,14 +52,14 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
     }
 
     if (this.proposalId != null && this.proposalId > 0) {
-      this.proposal$ = this.proposalService
+      this.proposalSubscription = this.proposalService
         .getProposalById(this.proposalId)
         .subscribe((result) => (this.proposal = result));
 
       // console.log(this.proposal);
     }
 
-    this.allTopics$ = this.topicService.getTopics().subscribe((result) => {
+    this.allTopicsSubscription = this.topicService.getTopics().subscribe((result) => {
       this.allTopics = result.map((t) => t);
     });
   }
@@ -67,15 +67,15 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    this.proposal$.unsubscribe();
-    this.postProposal$.unsubscribe();
-    this.putProposal$.unsubscribe();
+    this.proposalSubscription.unsubscribe();
+    this.postProposalSubscription.unsubscribe();
+    this.putProposalSubscription.unsubscribe();
   }
 
   onSubmit() {
     this.isSubmitted = true;
     if (this.isAdd) {
-      this.postProposal$ = this.proposalService
+      this.postProposalSubscription = this.proposalService
         .postProposal(this.proposal)
         .subscribe({
           next: (v) => this.router.navigateByUrl('/admin/proposal'),
@@ -84,7 +84,7 @@ export class AdminProposalFormComponent implements OnInit, OnDestroy {
     }
     if (this.isEdit) {
       // console.log(this.proposal);
-      this.putProposal$ = this.proposalService
+      this.putProposalSubscription = this.proposalService
         .putProposal(this.proposalId, this.proposal)
         .subscribe({
           next: (v) => this.router.navigateByUrl('/admin/proposal'),

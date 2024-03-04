@@ -12,8 +12,8 @@ import { Topic } from '../../../models/topic';
 })
 export class AdminProposalListComponent implements OnInit {
   proposals: Proposal[] = [];
-  proposals$: Subscription = new Subscription();
-  deleteProposal$: Subscription = new Subscription();
+  proposalsSubscription: Subscription = new Subscription();
+  deleteProposalSubscription: Subscription = new Subscription();
   errorMessage: string = '';
 
   constructor(
@@ -26,11 +26,11 @@ export class AdminProposalListComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.proposals$.unsubscribe();
+    this.proposalsSubscription.unsubscribe();
   }
 
   getProposals() {
-    this.proposals$ = this.proposalService
+    this.proposalsSubscription = this.proposalService
       .getProposals()
       .subscribe((result) => (this.proposals = result));
   }
@@ -48,7 +48,7 @@ export class AdminProposalListComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.deleteProposal$ = this.proposalService.deleteProposal(id).subscribe({
+    this.deleteProposalSubscription = this.proposalService.deleteProposal(id).subscribe({
       next: (v) => this.getProposals(),
       error: (e) => (this.errorMessage = e.message),
     });
