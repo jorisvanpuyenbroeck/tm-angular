@@ -17,7 +17,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => AdminRoutingModule,
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard]
   },
 
 ];
