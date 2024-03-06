@@ -1,6 +1,6 @@
 import {Component, HostListener, signal, ElementRef} from '@angular/core';
 import {AuthService} from "@auth0/auth0-angular";
-import {RoleService} from "./security/role.service";
+import {RoleService} from "./user/role.service";
 import {Router} from "@angular/router";
 
 @Component({

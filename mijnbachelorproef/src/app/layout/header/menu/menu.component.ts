@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, Component, signal, OnInit, OnDestroy} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { RoleService } from '../../../security/role.service';
+import { RoleService } from '../../../user/role.service';
 import { UserStore } from '../../../store/user-store';
 import {Observable, Subscription} from 'rxjs';
 import {User} from "../../../models/user";
-import {UserService} from "../../../security/user.service";
+import {UserService} from "../../../user/user.service";
 
 
 

@@ -38,7 +38,7 @@ export class UserStore extends ComponentStore<User> {
     });
   }
 
-  // Define a setter method for updating the user state
+  // Define a setter method for updating the student state
   readonly setUser = this.updater((state, user: User) => {
     return {...state, ...user};
   });

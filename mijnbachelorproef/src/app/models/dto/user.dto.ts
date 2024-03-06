@@ -11,7 +11,7 @@ export interface UserDto {
     password?: string;
     email?: string;
     emailVerified?: boolean;
-    // application: string; // don't submit the application information when a user is created
+    // application: string; // don't submit the application information when a student is created
     programType?: string;
     userLevel?: string;
     expertise?: string;

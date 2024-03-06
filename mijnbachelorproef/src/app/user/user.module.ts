@@ -1,14 +1,28 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../layout/shared.module';
-import { UserProposalListComponent } from './proposal/proposal-list/proposal-list.component';
-import { UserTopicListComponent } from './topic/topic-list/topic-list.component';
-import { UserOrganisationListComponent } from './organisation/organisation-list/organisation-list.component';
-import {UserProjectFormComponent} from "./project/project-form/project-form.component";
-import {UserProposalCardComponent} from "./proposal/proposal-card/proposal-card.component";
+import {UserService} from "./user.service";
+import {RoleService} from "./role.service";
+import {AuthService} from "@auth0/auth0-angular";
+import {StudentModule} from "./student/student.module";
+import {MentorModule} from "./mentor/mentor.module";
+import {CoachModule} from "./coach/coach.module";
+import {AdminModule} from "./admin/admin.module";
 
 @NgModule({
-  declarations: [UserProposalListComponent, UserTopicListComponent, UserOrganisationListComponent, UserProjectFormComponent, UserProposalCardComponent],
-  imports: [SharedModule],
-  exports: [UserProposalListComponent, UserTopicListComponent],
+  imports : [
+    StudentModule,
+    MentorModule,
+    CoachModule,
+    AdminModule
+  ],
+  exports : [
+    StudentModule,
+    MentorModule,
+    CoachModule,
+    AdminModule
+  ],
+  providers: [
+    UserService, RoleService, AuthService
+  ],
+
 })
-export class UserModule {}
+export class UserModule { }
