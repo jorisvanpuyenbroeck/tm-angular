@@ -6,7 +6,7 @@ import {LoginButtonComponent} from "./login-button/login-button.component";
 import {LogoutButtonComponent} from "./logout-button/logout-button.component";
 import {SignupButtonComponent} from "./signup-button/signup-button.component";
 import {MenuComponent} from "./menu/menu.component";
-import {SharedModule} from "../../shared.module";
+import {SharedModule} from "../../shared/shared.module";
 import {LayoutModule} from "../layout.module";
 import {AppRoutingModule} from "../../app-routing.module";
 

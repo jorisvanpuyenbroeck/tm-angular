@@ -1,7 +1,7 @@
 import { ComponentStore } from '@ngrx/component-store';
-import { User } from '../models/user';
+import { User } from '../shared/models/user';
 import {Injectable} from "@angular/core";
-import {Application} from "../models/application";
+import {Application} from "../shared/models/application";
 
 
 @Injectable()

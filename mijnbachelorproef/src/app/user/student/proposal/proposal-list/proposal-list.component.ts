@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Proposal } from '../../../../models/proposal';
-import { ProposalService } from '../proposal.service';
+import { Proposal } from '../../../../shared/models/proposal';
+import { ProposalService } from '../../../../shared/services/proposal.service';
 import { Subscription } from 'rxjs';
-import {User} from "../../../../models/user";
+import {User} from "../../../../shared/models/user";
 import {UserService} from "../../../user.service";
 
 @Component({

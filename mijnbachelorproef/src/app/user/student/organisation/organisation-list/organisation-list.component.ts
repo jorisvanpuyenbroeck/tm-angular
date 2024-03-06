@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Organisation } from '../../../../models/organisation';
-import { OrganisationService } from '../organisation.service';
+import { Organisation } from '../../../../shared/models/organisation';
+import { OrganisationService } from '../../../../shared/services/organisation.service';
 import { Subscription } from 'rxjs';
-import {User} from "../../../../models/user";
+import {User} from "../../../../shared/models/user";
 import {UserService} from "../../../user.service";
 
 @Component({

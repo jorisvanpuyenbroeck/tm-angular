@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Topic } from '../../../../models/topic';
-import { TopicService } from '../topic.service';
+import { Topic } from '../../../../shared/models/topic';
+import { TopicService } from '../../../../shared/services/topic.service';
 import { Location } from '@angular/common';
 
 @Component({

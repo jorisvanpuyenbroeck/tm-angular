@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Proposal} from "../../../../models/proposal";
-import {User} from "../../../../models/user";
+import {Proposal} from "../../../../shared/models/proposal";
+import {User} from "../../../../shared/models/user";
 
 @Component({
   selector: 'app-proposal-card',

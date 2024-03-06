@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Topic } from '../../../../models/topic';
-import { TopicService } from '../topic.service';
+import { Topic } from '../../../../shared/models/topic';
+import { TopicService } from '../../../../shared/services/topic.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 

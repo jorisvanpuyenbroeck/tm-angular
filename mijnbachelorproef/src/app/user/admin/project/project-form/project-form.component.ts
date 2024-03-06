@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Project } from '../../../../models/project';
-import { ProjectService } from '../project.service';
-import { TopicService } from '../../topic/topic.service';
-import { Topic } from '../../../../models/topic';
+import { Project } from '../../../../shared/models/project';
+import { ProjectService } from '../../../../shared/services/project.service';
+import { TopicService } from '../../../../shared/services/topic.service';
+import { Topic } from '../../../../shared/models/topic';
 import { Location } from '@angular/common';
-import {User} from "../../../../models/user";
-import {Organisation} from "../../../../models/organisation";
-import {Proposal} from "../../../../models/proposal";
+import {User} from "../../../../shared/models/user";
+import {Organisation} from "../../../../shared/models/organisation";
+import {Proposal} from "../../../../shared/models/proposal";
 
 @Component({
   selector: 'app-project-form',
@@ -94,7 +94,7 @@ export class AdminProjectFormComponent implements OnInit, OnDestroy {
     this.isSubmitted = true;
     if (this.isAdd) {
       this.postProjectSubscription = this.projectService
-        .postProject(this.project)
+        .postProjectAsAdmin(this.project)
         .subscribe({
           next: (v) => this.router.navigateByUrl('/admin/project'),
           error: (e) => (this.errorMessage = e.message),
@@ -103,7 +103,7 @@ export class AdminProjectFormComponent implements OnInit, OnDestroy {
     if (this.isEdit) {
       // console.log(this.project);
       this.putProjectSubscription = this.projectService
-        .putProject(this.projectId, this.project)
+        .putProjectAsAdmin(this.projectId, this.project)
         .subscribe({
           next: (v) => this.router.navigateByUrl('/admin/project'),
           error: (e) => (this.errorMessage = e.message),

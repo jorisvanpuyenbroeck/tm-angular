@@ -1,19 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Project } from '../../../../models/project';
-import { ProjectService } from '../project.service';
-import { TopicService } from '../../topic/topic.service';
-import { Topic } from '../../../../models/topic';
+import { Project } from '../../../../shared/models/project';
+import { ProjectService } from '../../../../shared/services/project.service';
+import { TopicService } from '../../../../shared/services/topic.service';
+import { Topic } from '../../../../shared/models/topic';
 import { Location } from '@angular/common';
-import {Proposal} from "../../../../models/proposal";
-import {Organisation} from "../../../../models/organisation";
-import {User} from "../../../../models/user";
+import {Proposal} from "../../../../shared/models/proposal";
+import {Organisation} from "../../../../shared/models/organisation";
+import {User} from "../../../../shared/models/user";
 import {UserService} from "../../../user.service";
-import {ProposalService} from "../../proposal/proposal.service";
-import {OrganisationService} from "../../organisation/organisation.service";
+import {ProposalService} from "../../../../shared/services/proposal.service";
+import {OrganisationService} from "../../../../shared/services/organisation.service";
 import { map } from 'rxjs/operators';
-import {ProjectDto} from "../../../../models/dto/project.dto";
+import {ProjectDto} from "../../../../shared/models/dto/project.dto";
 
 
 @Component({
@@ -91,17 +91,11 @@ export class StudentProjectFormComponent implements OnInit, OnDestroy {
     this.userSubscription = this.userService.userStore$.subscribe(user => {
       this.project.student = user;
     });
-    // this.proposalSubscription = this.proposalService.getProposalById(this.project.student.application.proposals[0]).subscribe((result) => {
-    //     this.project.proposal = result;
-    // });
-    // this.organisationSubscription = this.organisationService.getOrganisationById(this.project.student.application.organisations[0]).subscribe((result) => {
-    //     this.project.organisation = result;
-    // });
-    this.proposalSubscription = this.proposalService.getProposalById(1).subscribe((result) => {
-      this.project.proposal = result;
+    this.proposalSubscription = this.proposalService.getProposalById(this.project.student.application.proposals[0]).subscribe((result) => {
+        this.project.proposal = result;
     });
-    this.organisationSubscription = this.organisationService.getOrganisationById(1).subscribe((result) => {
-      this.project.organisation = result;
+    this.organisationSubscription = this.organisationService.getOrganisationById(this.project.student.application.organisations[0]).subscribe((result) => {
+        this.project.organisation = result;
     });
     this.project.student.application.topics.forEach((topicId) => {
       this.topicSubscription = this.topicService.getTopicById(topicId).subscribe((result) => {

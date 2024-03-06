@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Proposal } from '../../../../models/proposal';
-import { ProposalService } from '../proposal.service';
-import { TopicService } from '../../topic/topic.service';
-import { Topic } from '../../../../models/topic';
+import { Proposal } from '../../../../shared/models/proposal';
+import { ProposalService } from '../../../../shared/services/proposal.service';
+import { TopicService } from '../../../../shared/services/topic.service';
+import { Topic } from '../../../../shared/models/topic';
 import { Location } from '@angular/common';
 
 @Component({

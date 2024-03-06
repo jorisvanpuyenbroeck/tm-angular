@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Organisation } from '../../../../models/organisation';
-import { OrganisationService } from '../organisation.service';
+import { Organisation } from '../../../../shared/models/organisation';
+import { OrganisationService } from '../../../../shared/services/organisation.service';
 import { Location } from '@angular/common';
 
 @Component({

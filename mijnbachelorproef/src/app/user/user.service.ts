@@ -4,9 +4,9 @@ import { UserStore } from '../store/user-store';
 import { map, tap } from 'rxjs/operators';
 import {Observable, BehaviorSubject, first, take, Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {User} from "../models/user";
-import {Application} from "../models/application";
-import {UserDto} from "../models/dto/user.dto";
+import {User} from "../shared/models/user";
+import {Application} from "../shared/models/application";
+import {UserDto} from "../shared/models/dto/user.dto";
 import {RoleService} from "./role.service";
 
 @Injectable({

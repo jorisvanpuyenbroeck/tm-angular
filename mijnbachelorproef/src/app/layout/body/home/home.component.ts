@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
 import { UserStore} from "../../../store/user-store";
 import {UserService} from "../../../user/user.service";
 import {Subscription} from "rxjs";
-import {User} from "../../../models/user";
+import {User} from "../../../shared/models/user";
 
 @Component({
   selector: 'app-home',

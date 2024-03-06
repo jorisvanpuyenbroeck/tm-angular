@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { StudentProposalListComponent } from './proposal/proposal-list/proposal-list.component';
 import { StudentTopicListComponent } from './topic/topic-list/topic-list.component';
 import { StudentOrganisationListComponent } from './organisation/organisation-list/organisation-list.component';

@@ -1,8 +1,8 @@
 import {Component, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import { Topic } from '../../../../models/topic';
-import { TopicService } from '../topic.service';
+import { Topic } from '../../../../shared/models/topic';
+import { TopicService } from '../../../../shared/services/topic.service';
 import { Subscription } from 'rxjs';
-import {User} from "../../../../models/user";
+import {User} from "../../../../shared/models/user";
 import {UserService} from "../../../user.service";
 
 @Component({

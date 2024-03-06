@@ -1,6 +1,6 @@
 import {Component, signal, OnInit, OnDestroy} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import {User} from "../../../models/user";
+import {User} from "../../../shared/models/user";
 import {UserService} from "../../../user/user.service";
 
 

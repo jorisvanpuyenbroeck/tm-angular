@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../../../../models/project';
-import { ProjectService } from '../project.service';
+import { Project } from '../../../../shared/models/project';
+import { ProjectService } from '../../../../shared/services/project.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Topic } from '../../../../models/topic';
+import { Topic } from '../../../../shared/models/topic';
 
 @Component({
   selector: 'app-project-list',

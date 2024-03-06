@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Topic} from "../../../models/topic";
-import {User} from "../../../models/user";
+import {Topic} from "../../../shared/models/topic";
+import {User} from "../../../shared/models/user";
 import {Subscription} from "rxjs";
 import {UserService} from "../../../user/user.service";
 
