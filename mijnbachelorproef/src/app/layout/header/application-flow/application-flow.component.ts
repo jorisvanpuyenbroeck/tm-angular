@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Topic} from "../../models/topic";
-import {User} from "../../models/user";
+import {Topic} from "../../../models/topic";
+import {User} from "../../../models/user";
 import {Subscription} from "rxjs";
-import {UserService} from "../../security/user.service";
+import {UserService} from "../../../security/user.service";
 
 @Component({
   selector: 'app-application-flow',

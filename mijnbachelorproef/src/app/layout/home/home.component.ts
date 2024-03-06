@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { UserStore} from "../store/user-store";
+import { UserStore} from "../../store/user-store";
 import {first} from "rxjs";
-import {UserService} from "../security/user.service";
+import {UserService} from "../../security/user.service";
 
 @Component({
   selector: 'app-home',

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../layout/shared.module';
 import {AdminTopicListComponent} from "./topic/topic-list/topic-list.component";
 import {AdminTopicFormComponent} from "./topic/topic-form/topic-form.component";
 import {AdminProposalListComponent} from "./proposal/proposal-list/proposal-list.component";

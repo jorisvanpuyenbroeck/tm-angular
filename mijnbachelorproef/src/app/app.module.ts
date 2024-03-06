@@ -6,17 +6,17 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { MenuComponent } from './header/menu/menu.component';
-import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './layout/home/home.component';
+import { MenuComponent } from './layout/header/menu/menu.component';
+import { SharedModule } from './layout/shared.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from '@auth0/auth0-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminModule } from "./admin/admin.module";
-import { ApplicationFlowComponent } from './header/application-flow/application-flow.component';
-import { ApplicationStageComponent } from './header/application-stage/application-stage.component';
+import { ApplicationFlowComponent } from './layout/header/application-flow/application-flow.component';
+import { ApplicationStageComponent } from './layout/header/application-stage/application-stage.component';
 import {SecurityModule} from "./security/security.module";
-import {FooterModule} from "./footer/footer.module";
+import {FooterModule} from "./layout/footer/footer.module";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, MenuComponent, ApplicationFlowComponent, ApplicationStageComponent],
