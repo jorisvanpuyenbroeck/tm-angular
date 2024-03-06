@@ -11,14 +11,12 @@ import {BodyModule} from "./body/body.module";
 @NgModule({
   declarations: [],
   imports: [
-    BodyModule,
     FooterModule,
     HeaderModule,
     MaterialModule,
     ModalsModule
   ],
 exports: [
-    BodyModule,
     FooterModule,
     HeaderModule,
     MaterialModule,

@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
 import { UserStore} from "../../../store/user-store";
-import {first} from "rxjs";
 import {UserService} from "../../../user/user.service";
+import {Subscription} from "rxjs";
+import {User} from "../../../models/user";
 
 @Component({
   selector: 'app-home',
@@ -11,14 +11,24 @@ import {UserService} from "../../../user/user.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  user$;
+  user: User = {} as User;
+  userSubscription: Subscription = new Subscription();
+
+  isAuthenticated = signal(false);
+  isAdmin = signal(false);
+  isCoach = signal(false);
+  isStudent = signal(false);
+  isMentor = signal(false);
+
 
   constructor(private userStore: UserStore, private userService: UserService) {
-    this.user$ = this.userStore.state$;
-    this.user$.subscribe(user => {
+    this.userSubscription = this.userService.userStore$.subscribe(user => {
+      console.log("home component initialized");
+      // Update the local student property
+      this.user = user;
       if (user && user.sub) {
         this.userService.userExists(user.sub).subscribe(exists => {
-          console.log('student exists:', exists)
+          console.log('user exists:', exists)
           if (!exists) {
             this.userService.createUser(user).subscribe();
           }
@@ -26,4 +36,16 @@ export class HomeComponent {
       }
     });
   }
+
+  ngOnInit(): void {
+
+    this.isAuthenticated = this.userService.isAuthenticated;
+    this.isAdmin = this.userService.isAdmin;
+    this.isCoach = this.userService.isCoach;
+    this.isStudent = this.userService.isStudent;
+    this.isMentor = this.userService.isMentor;
+
+  }
+
+
 }

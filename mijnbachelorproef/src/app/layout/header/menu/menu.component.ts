@@ -1,9 +1,5 @@
-import {ChangeDetectionStrategy, Component, signal, OnInit, OnDestroy} from '@angular/core';
+import {Component, signal, OnInit, OnDestroy} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '@auth0/auth0-angular';
-import { RoleService } from '../../../user/role.service';
-import { UserStore } from '../../../store/user-store';
-import {Observable, Subscription} from 'rxjs';
 import {User} from "../../../models/user";
 import {UserService} from "../../../user/user.service";
 
@@ -15,56 +11,40 @@ import {UserService} from "../../../user/user.service";
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit, OnDestroy {
+  user: User = {} as User;
+  userSubscription: any;
   hamburgerOpen = false;
   adminDropdownOpen = false;
   coachDropdownOpen = false;
   studentDropdownOpen = false;
   mentorDropdownOpen = false;
 
-  //Signals https://angular.dev/guide/signals
   isAuthenticated = signal(false);
   isAdmin = signal(false);
   isCoach = signal(false);
   isStudent = signal(false);
   isMentor = signal(false);
 
-  // local
-  user: User = {} as User;
-
-  // Subscription
-  userSubscription: Subscription = new Subscription();
-
   constructor(
-    public authService: AuthService,
-    public roleService: RoleService,
     public userService: UserService,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
     this.userSubscription = this.userService.userStore$.subscribe(user => {
+      console.log("menu component initialized");
+      // Update the local student property
       this.user = user;
     });
-    this.authService.isAuthenticated$.subscribe((auth) => {
-      this.isAuthenticated.set(auth);
-    });
-    this.roleService.hasPermission('isAdmin').subscribe((admin) => {
-      this.isAdmin.set(admin);
-    });
-    this.roleService.hasPermission('isCoach').subscribe((coach) => {
-      this.isCoach.set(coach);
-    });
-    this.roleService.hasPermission('isStudent').subscribe((student) => {
-      this.isStudent.set(student);
-    });
-    this.roleService.hasPermission('isMentor').subscribe((mentor) => {
-      this.isMentor.set(mentor);
-    });
+    this.isAuthenticated = this.userService.isAuthenticated;
+    this.isAdmin = this.userService.isAdmin;
+    this.isCoach = this.userService.isCoach;
+    this.isStudent = this.userService.isStudent;
+    this.isMentor = this.userService.isMentor;
 
   }
 
   ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
   }
 
   toggleHamburger(): void {

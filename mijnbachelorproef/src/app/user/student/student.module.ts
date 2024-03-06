@@ -6,9 +6,11 @@ import { StudentOrganisationListComponent } from './organisation/organisation-li
 import { StudentProjectFormComponent } from "./project/project-form/project-form.component";
 import { StudentProposalCardComponent} from "./proposal/proposal-card/proposal-card.component";
 import {LayoutModule} from "../../layout/layout.module";
+import {StudentHomeComponent} from "./home/home.component";
 
 @NgModule({
   declarations: [
+    StudentHomeComponent,
     StudentProposalListComponent,
     StudentTopicListComponent,
     StudentOrganisationListComponent,
@@ -22,6 +24,7 @@ import {LayoutModule} from "../../layout/layout.module";
     LayoutModule
   ],
   exports: [
+    StudentHomeComponent,
     StudentProposalListComponent,
     StudentTopicListComponent,
     StudentOrganisationListComponent,

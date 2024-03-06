@@ -1,19 +1,32 @@
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserStore } from '../store/user-store';
 import { map, tap } from 'rxjs/operators';
-import {Observable, BehaviorSubject, first, take} from "rxjs";
+import {Observable, BehaviorSubject, first, take, Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
 import {Application} from "../models/application";
 import {UserDto} from "../models/dto/user.dto";
+import {RoleService} from "./role.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    public userStore$: Observable<User> ;
+    // local
+    public userStore$: Observable<User> = new BehaviorSubject<User>({} as User);
+    user: User = {} as User;
+    userStore: UserStore = new UserStore();
+    //Signals https://angular.dev/guide/signals
+    isAuthenticated = signal(false);
+    isAdmin = signal(false);
+    isCoach = signal(false);
+    isStudent = signal(false);
+    isMentor = signal(false);
+
+    // Subscription
+    userSubscription: Subscription = new Subscription();
     hasApplicationTopics: boolean = false;
     hasApplicationOrganisations: boolean = false;
     hasApplicationProposals: boolean = false;
@@ -22,14 +35,34 @@ export class UserService {
     hasApplicationOneProposal: boolean = false;
     canProposeProject: boolean = false;
 
-    constructor(public auth: AuthService, private userStore: UserStore, private http: HttpClient) {
-        this.updateUserState();
-        this.userStore$ = this.userStore.select(state => state);
+    constructor(private auth: AuthService, private roleService: RoleService, userStore: UserStore, private http: HttpClient) {
 
+        console.log("user service constructor")
+        this.updateUserState();
+
+        auth.isAuthenticated$.subscribe((auth) => {
+            this.isAuthenticated.set(auth);
+        });
+        roleService.hasPermission('isAdmin').subscribe((admin) => {
+            this.isAdmin.set(admin);
+        });
+        roleService.hasPermission('isCoach').subscribe((coach) => {
+            this.isCoach.set(coach);
+        });
+        roleService.hasPermission('isStudent').subscribe((student) => {
+            this.isStudent.set(student);
+        });
+        roleService.hasPermission('isMentor').subscribe((mentor) => {
+            this.isMentor.set(mentor);
+        });
     }
 
     updateUserState(): void {
         console.log('trying to update student state')
+        this.userStore$ = this.userStore.select(state => state);
+        this.userSubscription = this.userStore$.subscribe(user => {
+            this.user = user;
+        });
         this.auth.user$.pipe(
             take(1),
             map(user => {

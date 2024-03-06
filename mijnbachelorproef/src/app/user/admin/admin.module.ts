@@ -10,9 +10,11 @@ import {AdminOrganisationListComponent} from "./organisation/organisation-list/o
 import {AdminProjectFormComponent} from "./project/project-form/project-form.component";
 import {AdminProjectListComponent} from "./project/project-list/project-list.component";
 import {LayoutModule} from "../../layout/layout.module";
+import {AdminHomeComponent} from "./home/home.component";
 
 @NgModule({
   declarations: [
+    AdminHomeComponent,
     AdminTopicListComponent,
     AdminTopicFormComponent,
     AdminProposalListComponent,
@@ -28,6 +30,7 @@ import {LayoutModule} from "../../layout/layout.module";
   ],
 
   exports: [
+    AdminHomeComponent,
     AdminTopicListComponent,
     AdminTopicFormComponent,
     AdminProposalListComponent,
