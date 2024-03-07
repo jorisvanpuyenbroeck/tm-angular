@@ -7,8 +7,10 @@ import { AdminProposalFormComponent } from './proposal/proposal-form/proposal-fo
 import { AdminOrganisationFormComponent } from "./organisation/organisation-form/organisation-form.component";
 import { AdminOrganisationListComponent } from "./organisation/organisation-list/organisation-list.component";
 import { AdminProjectListComponent } from "./project/project-list/project-list.component";
+import {AdminHomeComponent} from "./home/home.component";
 
 const routes: Routes = [
+  { path: '', component: AdminHomeComponent},
   { path: 'topic', component: AdminTopicListComponent },
   { path: 'topic/form', component: AdminTopicFormComponent },
   { path: 'proposal', component: AdminProposalListComponent },

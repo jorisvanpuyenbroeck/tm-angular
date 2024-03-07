@@ -1,0 +1,50 @@
+<div class="container mx-auto mt-8 mb-8">
+    <form [formGroup]="organisationForm" (ngSubmit)="onSubmit()">
+        <div class="m-1 mb-6 form-group">
+            <label class="block mb-2 text-sm font-medium text-gray-900" for="name"
+            >Name</label
+            >
+            <input
+                class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                id="name"
+                placeholder="Name"
+                formControlName="name"
+                required
+                type="text"
+            >
+            <span
+                    *ngIf="!organisationForm.get('name')?.valid && organisationForm.get('name')?.touched"
+                    class="help-block">
+            Please enter a valid name!
+          </span>
+        </div>
+        <div class="m-1 mb-6 form-group">
+            <label class="block mb-2 text-sm font-medium text-gray-900" for="name"
+            >Description</label
+            >
+            <textarea
+                class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                cols="40"
+                id="description"
+                formControlName="description"
+                placeholder="Description"
+                required
+                rows="5"
+                type="text"
+            ></textarea>
+        </div>
+        <button
+                class="m-1 text-white bg-blue-700 enabled:hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75"
+                type="submit"
+        >
+            Add
+        </button>
+        <button
+                class="m-1 text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75"
+                (click)="goBack()"
+        >
+            Cancel
+        </button>
+
+    </form>
+</div>

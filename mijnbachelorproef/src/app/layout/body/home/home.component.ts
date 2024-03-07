@@ -22,6 +22,11 @@ export class HomeComponent {
 
 
   constructor(private userStore: UserStore, private userService: UserService) {
+
+  }
+
+  ngOnInit(): void {
+
     this.userSubscription = this.userService.userStore$.subscribe(user => {
       console.log("home component initialized");
       // Update the local student property
@@ -35,10 +40,6 @@ export class HomeComponent {
         });
       }
     });
-  }
-
-  ngOnInit(): void {
-
     this.isAuthenticated = this.userService.isAuthenticated;
     this.isAdmin = this.userService.isAdmin;
     this.isCoach = this.userService.isCoach;

@@ -1,4 +1,4 @@
-<nav class="bg-white border-gray-200 border-b mb-2">
+<nav class="bg-white border-gray-200 border-b mb-2 pr-4">
   <div class="flex flex-wrap justify-between items-center">
     <a class="flex items-center" routerLink="/">
 
@@ -163,15 +163,20 @@
                     class="py-1 text-sm text-gray-700"
             >
               <li>
+<!--                <a-->
+<!--                        (click)="navigateTo('mentor/topic')"-->
+<!--                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"-->
+<!--                >Topics</a-->
+<!--                >-->
+<!--                <a-->
+<!--                        (click)="navigateTo('mentor/proposal')"-->
+<!--                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"-->
+<!--                >Proposals</a-->
+<!--                >-->
                 <a
-                        (click)="navigateTo('mentor/topic')"
+                        (click)="navigateTo('mentor')"
                         class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >Topics</a
-                >
-                <a
-                        (click)="navigateTo('mentor/proposal')"
-                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >Proposals</a
+                >Your organisation</a
                 >
                 <app-logout-button class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"></app-logout-button>
 
