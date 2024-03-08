@@ -4,12 +4,15 @@ import { StudentProposalListComponent } from './proposal/proposal-list/proposal-
 import { StudentOrganisationListComponent } from "./organisation/organisation-list/organisation-list.component";
 import { StudentTopicListComponent} from "./topic/topic-list/topic-list.component";
 import {StudentHomeComponent} from "./home/home.component";
+import {StudentProjectFormComponent} from "./project/project-form/project-form.component";
 
 const routes: Routes = [
   { path: '', component: StudentHomeComponent},
-  { path: 'topic', component: StudentTopicListComponent },
-  { path: 'proposal', component: StudentProposalListComponent },
-  { path: 'organisation', component: StudentOrganisationListComponent },
+  { path: 'topics', component: StudentTopicListComponent },
+  { path: 'proposals', component: StudentProposalListComponent },
+  { path: 'organisations', component: StudentOrganisationListComponent },
+  { path: 'project', component: StudentProjectFormComponent },
+
 ];
 
 @NgModule({

@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {OrganisationService} from "../../../shared/services/organisation.service";
 import {Location} from "@angular/common";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
-import {errors} from "jose";
+import {CustomValidators} from "../../../shared/validators/custom-validators";
 
 @Component({
   selector: 'app-mentor-organisation-form',
@@ -16,30 +16,12 @@ export class MentorOrganisationFormComponent implements OnInit{
 
   // local variables
   organisationForm: FormGroup = new FormGroup({});
-  organisations: Organisation[] = [];
-  organisationsSubscription: Subscription = new Subscription();
-  takenOrganisationNames: string[] = [];
-
-  organisationId: number = 0;
-  organisation: Organisation = {
-    organisationId: 0,
-    name: '',
-    address: '',
-    postalCode: '',
-    city: '',
-    phone: '',
-    email: '',
-    url: '',
-    contact: ''
-  };
 
   isSubmitted: boolean = false;
   errorMessage: string = '';
 
   // subscriptions
-  organisationSubscription: Subscription = new Subscription();
   postOrganisationSubscription: Subscription = new Subscription();
-  putOrganisationSubscription: Subscription = new Subscription();
 
   constructor(
       private router: Router,
@@ -49,27 +31,28 @@ export class MentorOrganisationFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.organisationForm = new FormGroup({
-      'name': new FormControl(null, Validators.required),
+      'name': new FormControl(null, [Validators.required, CustomValidators.invalidOrganisationName]),
+      'address': new FormControl(null, Validators.required),
+      'postalCode': new FormControl(null, Validators.required),
+      'city': new FormControl(null, Validators.required),
+      'phone': new FormControl(null, Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'url': new FormControl(null, Validators.required),
+      'contact': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required),
     });
-    this.getTakenOrganisationNames();
-  }
-
-  getTakenOrganisationNames() {
-    this.organisationsSubscription = this.organisationService
-        .getOrganisations()
-        .subscribe((result: Organisation[]) => (this.organisations = result))
-    this.takenOrganisationNames = this.organisations.map(organisation => organisation.name);
   }
 
   onSubmit() {
     console.log(this.organisationForm);
-
+    this.postOrganisationSubscription = this.organisationService.postOrganisation(this.organisationForm.value as Organisation).subscribe({
+      next: (v) => this.router.navigateByUrl("/mentor"),
+      error: (e) => this.errorMessage = e.message
+    });
+    this.organisationForm.reset();
   }
   goBack() {
     this.location.back();
   }
 
-
-  protected readonly errors = errors;
 }

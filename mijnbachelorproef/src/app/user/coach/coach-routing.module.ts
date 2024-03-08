@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {CoachHomeComponent} from "./home/home.component";
+import {CoachProposalFormComponent} from "./proposal-form/proposal-form.component";
+import {HomeComponent} from "../../layout/body/home/home.component";
 
 const routes: Routes = [
 
-  { path: '', component: CoachHomeComponent},
-
-//    { path: 'proposal/form', component: CoachProposalFormComponent },
-
+  { path: '', component: HomeComponent},
+  { path: 'proposal/form', component: CoachProposalFormComponent },
 
 ];
 
