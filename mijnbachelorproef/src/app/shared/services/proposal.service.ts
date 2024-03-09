@@ -1,48 +1,48 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Proposal } from '../models/proposal';
+import { Proposal } from '../models/proposal'; // Make sure to import your Proposal model
+import { ApiConfigService } from '../../app.config'; // Import the config service
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProposalService {
-  constructor(private httpClient: HttpClient) {}
+  private readonly proposalsEndpoint = 'proposals'; // API endpoint (relative path)
+
+  constructor(
+      private httpClient: HttpClient,
+      private apiConfigService: ApiConfigService // Inject the config service
+  ) {}
 
   getProposals(): Observable<Proposal[]> {
-    return this.httpClient.get<Proposal[]>(
-      'https://localhost:7026/api/proposals',
-    );
+    const url = `${this.apiConfigService.apiBaseUrl}${this.proposalsEndpoint}`;
+    return this.httpClient.get<Proposal[]>(url);
   }
 
   getProposalById(id: number): Observable<Proposal> {
-    return this.httpClient.get<Proposal>(
-      'https://localhost:7026/api/proposals/' + id,
-    );
+    const url = `${this.apiConfigService.apiBaseUrl}${this.proposalsEndpoint}/${id}`;
+    return this.httpClient.get<Proposal>(url);
   }
+
   getProposalsByTopics(topicIds: number[]): Observable<Proposal[]> {
     const queryString = topicIds.map(id => `topicIds=${id}`).join('&');
-    const apiUrl = `https://localhost:7026/api/proposals/by-topic?${queryString}`;
+    const apiUrl = `${this.apiConfigService.apiBaseUrl}${this.proposalsEndpoint}/by-topic?${queryString}`;
     return this.httpClient.get<Proposal[]>(apiUrl);
   }
 
-  postProposal(Proposal: Proposal): Observable<Proposal> {
-    return this.httpClient.post<Proposal>(
-      'https://localhost:7026/api/proposals',
-      Proposal,
-    );
+  postProposal(proposal: Proposal): Observable<Proposal> {
+    const url = `${this.apiConfigService.apiBaseUrl}${this.proposalsEndpoint}`;
+    return this.httpClient.post<Proposal>(url, proposal);
   }
 
   putProposal(id: number, proposal: Proposal): Observable<Proposal> {
-    return this.httpClient.put<Proposal>(
-      'https://localhost:7026/api/proposals/' + id,
-      proposal,
-    );
+    const url = `${this.apiConfigService.apiBaseUrl}${this.proposalsEndpoint}/${id}`;
+    return this.httpClient.put<Proposal>(url, proposal);
   }
 
   deleteProposal(id: number): Observable<Proposal> {
-    return this.httpClient.delete<Proposal>(
-      'https://localhost:7026/api/proposals/' + id,
-    );
+    const url = `${this.apiConfigService.apiBaseUrl}${this.proposalsEndpoint}/${id}`;
+    return this.httpClient.delete<Proposal>(url);
   }
 }

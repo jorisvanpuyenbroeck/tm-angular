@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from '@auth0/auth0-angular';
 import { UserModule} from "./user/user.module";
 import { LayoutModule} from "./layout/layout.module";
+import {ApiConfigService} from "./app.config";
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { LayoutModule} from "./layout/layout.module";
       useClass: AuthHttpInterceptor,
       multi: true
     },
+    ApiConfigService
 ],
   bootstrap: [AppComponent],
 })
