@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
     providedIn: 'root', // Make sure it's available globally
 })
 export class ApiConfigService {
-    apiBaseUrl = 'https://bpgezinswetenschappenapi.azurewebsites.net/api/'; // Development URL
-    // apiBaseUrl = 'https://localhost:7026/api/'; // Development URL
+    // apiBaseUrl = 'https://bpgezinswetenschappenapi.azurewebsites.net/api/'; // Development URL
+    apiBaseUrl = 'https://localhost:7026/api/'; // Development URL
 
 
     // You can add other configuration properties here
