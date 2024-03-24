@@ -12,7 +12,6 @@ import {User} from "../../../../shared/models/user";
 import {UserService} from "../../../user.service";
 import {ProposalService} from "../../../../shared/services/proposal.service";
 import {OrganisationService} from "../../../../shared/services/organisation.service";
-import { map } from 'rxjs/operators';
 import {ProjectDto} from "../../../../shared/models/dto/project.dto";
 
 
@@ -130,12 +129,15 @@ export class StudentProjectFormComponent implements OnInit, OnDestroy {
       const projectDto: ProjectDto = {
       createdAt: this.project.createdAt,
       updatedAt: this.project.updatedAt,
-      title: this.project.title,
-      description: this.project.description,
+      title: this.project.proposal.title,
+      description: this.project.proposal.description,
       studentId: 9,
       organisationId: this.project.student.application.organisations[0],
       proposalId: this.project.student.application.proposals[0],
-      topics: this.project.topics
+      topics: this.project.topics,
+      stage: 'Gestart',
+      active: true,
+
     };
 
 

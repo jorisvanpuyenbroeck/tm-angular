@@ -9,4 +9,6 @@ export interface ProjectDto {
     organisationId: number;
     proposalId: number;
     topics: Topic[];
+    stage: string;
+    active: boolean;
 }

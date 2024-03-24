@@ -8,6 +8,7 @@ import {TopicService} from "./services/topic.service";
 import {OrganisationService} from "./services/organisation.service";
 import {ProposalService} from "./services/proposal.service";
 import {ProjectService} from "./services/project.service";
+import {UserService} from "../user/user.service";
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import {ProjectService} from "./services/project.service";
       TopicService,
       OrganisationService,
       ProposalService,
-      ProjectService
+      ProjectService,
+      UserService
   ],
 })
 export class SharedModule {}

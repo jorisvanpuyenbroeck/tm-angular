@@ -18,15 +18,18 @@ export const routes: Routes = [
   },
   {
       path: 'mentor',
-      loadChildren: () => MentorRoutingModule
+      loadChildren: () => MentorRoutingModule,
+      canActivateChild: [AuthGuard]
   },
   {
       path: 'coach',
-      loadChildren: () => CoachRoutingModule
+      loadChildren: () => CoachRoutingModule,
+      canActivateChild: [AuthGuard]
   },
   {
       path: 'student',
-      loadChildren: () => StudentRoutingModule
+      loadChildren: () => StudentRoutingModule,
+      canActivateChild: [AuthGuard]
   }
 
 ];
